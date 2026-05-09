@@ -6,7 +6,7 @@ import Image from "next/image";
 import {
   Menu, X, ChevronDown,
   Store, Utensils, Truck, HardHat, Factory, Briefcase,
-  ShoppingBag, Package, Receipt, Shield, Users, BarChart3,
+  ShoppingBag, Package, Receipt, Users, BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
@@ -30,34 +30,30 @@ const industries = [
   { label: "Professional Services", href: "/industries/professional-services", desc: "Time tracking, retainers, and project billing", icon: "Briefcase" },
 ];
 
-type FeatureItem = { name: string; href: string; desc: string };
+type FeatureItem = { name: string; href: string };
 type FeatureCategory = {
   id: string;
   name: string;
   Icon: React.ElementType;
   color: string;
-  bg: string;
-  dot: string;
   features: FeatureItem[];
 };
 
+// hrefs map to real section ids on /features page:
+// pos, inventory, sales, purchasing, accounting, payroll
 const featureCategories: FeatureCategory[] = [
   {
     id: "sales",
     name: "Sales & Marketing",
     Icon: ShoppingBag,
     color: "text-sky-600",
-    bg: "bg-sky-50",
-    dot: "bg-sky-400",
     features: [
-      { name: "Point of Sale", href: "/features#pos", desc: "Fast checkout with barcode scanning, split payments, and offline mode" },
-      { name: "Sales Orders", href: "/features#sales-orders", desc: "Full pipeline visibility from quote to confirmed delivery" },
-      { name: "Quotes & Estimates", href: "/features#quotes", desc: "Professional quotes with expiry dates and one-click conversion" },
-      { name: "Sales Returns", href: "/features#sales-returns", desc: "Full and partial returns with stock restoration and credit notes" },
-      { name: "Customer CRM", href: "/features#crm", desc: "Records with order history, credit limits, and payment terms" },
-      { name: "Aged Receivables", href: "/features#aged-receivables", desc: "Track overdue invoices by age bucket with automated reminders" },
-      { name: "Loyalty Programme", href: "/features#loyalty", desc: "Earn and redeem customer points at POS to drive repeat business" },
-      { name: "GDPR Tools", href: "/features#gdpr", desc: "Data export, erasure requests, and consent management" },
+      { name: "Point of Sale", href: "/features#pos" },
+      { name: "Sales Orders & Quotes", href: "/features#sales" },
+      { name: "Customer CRM", href: "/features#sales" },
+      { name: "Aged Receivables", href: "/features#sales" },
+      { name: "Loyalty Programme", href: "/features#sales" },
+      { name: "GDPR Tools", href: "/features#sales" },
     ],
   },
   {
@@ -65,15 +61,13 @@ const featureCategories: FeatureCategory[] = [
     name: "Supply Chain",
     Icon: Package,
     color: "text-emerald-600",
-    bg: "bg-emerald-50",
-    dot: "bg-emerald-400",
     features: [
-      { name: "Inventory Management", href: "/features#inventory", desc: "Real-time stock tracking with low stock alerts and auto-reorders" },
-      { name: "Multi-Location Stock", href: "/features#multi-location", desc: "Centralized inventory visibility across all branches and warehouses" },
-      { name: "Stock Transfers", href: "/features#stock-transfers", desc: "Move stock between locations with a full audit trail" },
-      { name: "Batch & Serial Tracking", href: "/features#batch-serial", desc: "Track items by batch or serial number for full traceability" },
-      { name: "Purchase Orders", href: "/features#purchase-orders", desc: "Create and track POs with approval workflows and delivery tracking" },
-      { name: "Supplier Management", href: "/features#suppliers", desc: "Supplier profiles, payment terms, credit limits, and purchase history" },
+      { name: "Inventory Management", href: "/features#inventory" },
+      { name: "Multi-Location Stock", href: "/features#inventory" },
+      { name: "Stock Transfers", href: "/features#inventory" },
+      { name: "Batch & Serial Tracking", href: "/features#inventory" },
+      { name: "Purchase Orders", href: "/features#purchasing" },
+      { name: "Supplier Management", href: "/features#purchasing" },
     ],
   },
   {
@@ -81,29 +75,13 @@ const featureCategories: FeatureCategory[] = [
     name: "Finance & Accounting",
     Icon: Receipt,
     color: "text-violet-600",
-    bg: "bg-violet-50",
-    dot: "bg-violet-400",
     features: [
-      { name: "Invoicing", href: "/features#invoicing", desc: "VAT-compliant invoices auto-generated from confirmed orders" },
-      { name: "Payments", href: "/features#payments", desc: "Record payments across cash, card, bank transfer, and credit accounts" },
-      { name: "VAT Management & MTD", href: "/features#vat", desc: "Calculate VAT correctly and file returns digitally to HMRC" },
-      { name: "Chart of Accounts", href: "/features#accounts", desc: "Double-entry bookkeeping with hierarchical structure and trial balance" },
-      { name: "Bank Reconciliation", href: "/features#bank-reconciliation", desc: "Match bank statement transactions to journal entries" },
-      { name: "Open Banking", href: "/features#open-banking", desc: "Auto-import daily bank transactions via Open Banking API" },
-      { name: "Reports & Analytics", href: "/features#reports", desc: "P&L, Balance Sheet, Cash Flow, and 10+ business reports" },
-    ],
-  },
-  {
-    id: "compliance",
-    name: "UK Compliance",
-    Icon: Shield,
-    color: "text-red-600",
-    bg: "bg-red-50",
-    dot: "bg-red-400",
-    features: [
-      { name: "CIS Module", href: "/features#cis", desc: "Auto-calculate subcontractor deductions at 20% or 30% for HMRC" },
-      { name: "IR35 Tool", href: "/features#ir35", desc: "Assess and record contractor IR35 status for due diligence" },
-      { name: "MTD VAT Filing", href: "/features#mtd", desc: "Submit VAT returns directly to HMRC via Making Tax Digital API" },
+      { name: "Invoicing & Payments", href: "/features#accounting" },
+      { name: "VAT Management & MTD", href: "/features#accounting" },
+      { name: "Chart of Accounts", href: "/features#accounting" },
+      { name: "Bank Reconciliation", href: "/features#accounting" },
+      { name: "Open Banking", href: "/features#accounting" },
+      { name: "Reports & Analytics", href: "/features#accounting" },
     ],
   },
   {
@@ -111,13 +89,11 @@ const featureCategories: FeatureCategory[] = [
     name: "HR & Payroll",
     Icon: Users,
     color: "text-amber-600",
-    bg: "bg-amber-50",
-    dot: "bg-amber-400",
     features: [
-      { name: "Payroll", href: "/features#payroll", desc: "PAYE, NI, and pension contributions calculated automatically" },
-      { name: "Timesheets", href: "/features#timesheets", desc: "Track employee hours for payroll and labour cost analysis" },
-      { name: "Leave Management", href: "/features#leave", desc: "Manage leave entitlements, requests, and approval workflows" },
-      { name: "Payslips", href: "/features#payslips", desc: "Professional payslips with all statutory deductions visible" },
+      { name: "Payroll", href: "/features#payroll" },
+      { name: "Timesheets", href: "/features#payroll" },
+      { name: "Leave Management", href: "/features#payroll" },
+      { name: "Payslips", href: "/features#payroll" },
     ],
   },
   {
@@ -125,12 +101,10 @@ const featureCategories: FeatureCategory[] = [
     name: "Reports & System",
     Icon: BarChart3,
     color: "text-slate-600",
-    bg: "bg-slate-100",
-    dot: "bg-slate-400",
     features: [
-      { name: "Reports Hub", href: "/features#reports-hub", desc: "All business reports with flexible date and location filters" },
-      { name: "Activity Logs", href: "/features#activity-logs", desc: "Immutable audit trail of every user action for compliance" },
-      { name: "System Settings", href: "/features#settings", desc: "Configure currencies, tax rules, and all business settings" },
+      { name: "Reports Hub", href: "/features" },
+      { name: "Activity Logs", href: "/features" },
+      { name: "System Settings", href: "/features" },
     ],
   },
 ];
@@ -211,41 +185,36 @@ export function Header() {
 
                 {featuresOpen && (
                   <div
-                    className="absolute top-full left-0 mt-2 w-[700px] bg-white rounded-2xl shadow-[0_12px_40px_-12px_rgba(10,37,64,0.20)] border border-(--color-border) p-4"
+                    className="absolute top-full left-0 mt-2 w-140 bg-white rounded-2xl shadow-[0_12px_40px_-12px_rgba(10,37,64,0.18)] border border-(--color-border) p-6"
                     onMouseEnter={openFeatures}
                     onMouseLeave={closeFeatures}
                   >
-                    <div className="grid grid-cols-3 gap-1">
+                    <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                       {featureCategories.map((cat) => (
                         <div key={cat.id}>
-                          <div className={cn("flex items-center gap-1.5 px-2 py-1.5 mb-0.5 rounded-lg", cat.bg)}>
-                            <cat.Icon className={cn("h-3.5 w-3.5 shrink-0", cat.color)} />
-                            <span className={cn("text-[10px] font-bold uppercase tracking-wider leading-none", cat.color)}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <cat.Icon className={cn("h-4 w-4 shrink-0", cat.color)} />
+                            <span className="text-xs font-semibold uppercase tracking-wider text-(--color-muted)">
                               {cat.name}
                             </span>
                           </div>
-                          {cat.features.map((f) => (
-                            <Link
-                              key={f.href}
-                              href={f.href}
-                              className="block px-2 py-1.5 rounded-lg hover:bg-(--color-mist) transition-colors group"
-                              onClick={() => setFeaturesOpen(false)}
-                            >
-                              <div className="flex items-center gap-1.5">
-                                <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", cat.dot)} />
-                                <span className="text-[12.5px] font-medium text-(--color-deep-blue) group-hover:text-(--color-cyan) leading-tight">
+                          <ul className="space-y-1">
+                            {cat.features.map((f) => (
+                              <li key={f.name}>
+                                <Link
+                                  href={f.href}
+                                  className="block py-1 text-sm text-(--color-text) hover:text-(--color-cyan) transition-colors"
+                                  onClick={() => setFeaturesOpen(false)}
+                                >
                                   {f.name}
-                                </span>
-                              </div>
-                              <p className="text-[11px] text-(--color-muted) leading-snug mt-0.5 ml-3 line-clamp-2">
-                                {f.desc}
-                              </p>
-                            </Link>
-                          ))}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-3 pt-3 border-t border-(--color-border) flex items-center justify-between">
+                    <div className="mt-5 pt-4 border-t border-(--color-border) flex items-center justify-between">
                       <span className="text-xs text-(--color-muted)">31 modules. One platform.</span>
                       <Link
                         href="/features"
