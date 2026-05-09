@@ -5,7 +5,6 @@ export default config({
     ? {
         kind: "github",
         repo: process.env.KEYSTATIC_GITHUB_REPO as `${string}/${string}`,
-        branchPrefix: "keystatic/",
       }
     : { kind: "local" },
   ui: {
