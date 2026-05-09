@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { FeatureBlock } from "@/components/sections/FeatureBlock";
 import { CTASection } from "@/components/sections/CTASection";
 
@@ -8,6 +9,48 @@ export const metadata: Metadata = {
     "OpesFlux features: POS, inventory, accounting, payroll, tax compliance, CRM, and reporting. All in one platform. Works for any business in any country.",
   alternates: { canonical: "https://opesflux.devsandvisuals.com/features" },
 };
+
+function ScreenshotVisual({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative w-full rounded-2xl overflow-hidden border border-(--color-border) shadow-[0_8px_32px_-8px_rgba(10,37,64,0.18)] bg-(--color-deep-blue)">
+      <Image
+        src={src}
+        alt={alt}
+        width={1200}
+        height={750}
+        className="w-full h-auto block"
+        quality={90}
+      />
+    </div>
+  );
+}
+
+function POSVisual() {
+  return (
+    <div className="w-full flex flex-col gap-3">
+      <div className="relative w-full rounded-2xl overflow-hidden border border-(--color-border) shadow-[0_8px_32px_-8px_rgba(10,37,64,0.18)]">
+        <Image
+          src="/features/POS1.png"
+          alt="OpesFlux POS product grid"
+          width={1260}
+          height={760}
+          className="w-full h-auto block"
+          quality={90}
+        />
+      </div>
+      <div className="relative w-52 self-end rounded-2xl overflow-hidden border border-(--color-border) shadow-[0_8px_32px_-8px_rgba(10,37,64,0.22)] -mt-16 mr-4">
+        <Image
+          src="/features/POS2.png"
+          alt="OpesFlux POS payment screen"
+          width={490}
+          height={640}
+          className="w-full h-auto block"
+          quality={90}
+        />
+      </div>
+    </div>
+  );
+}
 
 const features = [
   {
@@ -22,6 +65,7 @@ const features = [
       "Split payments: cash, card, gift card, account credit",
       "Multi-location: every location's sales feed one dashboard",
     ],
+    visual: <POSVisual />,
   },
   {
     id: "inventory",
@@ -35,6 +79,7 @@ const features = [
       "Automatic reorder alerts and purchase order generation",
       "Inter-branch transfers with digital delivery notes",
     ],
+    visual: <ScreenshotVisual src="/features/Inventory.png" alt="OpesFlux Inventory management" />,
   },
   {
     id: "sales",
@@ -48,6 +93,7 @@ const features = [
       "Loyalty points with automatic redemption at POS",
       "Aged receivables and automated overdue reminders",
     ],
+    visual: <ScreenshotVisual src="/features/SOD.png" alt="OpesFlux Sales Order form" />,
   },
   {
     id: "purchasing",
@@ -74,6 +120,7 @@ const features = [
       "Tax filing — jurisdiction configurable, no hardcoded rules",
       "P&L, balance sheet, and cash flow updated in real time",
     ],
+    visual: <ScreenshotVisual src="/features/Invoices.png" alt="OpesFlux Invoicing and Finance" />,
   },
   {
     id: "payroll",
@@ -116,6 +163,7 @@ export default function FeaturesPage() {
               title={f.title}
               description={f.description}
               bullets={f.bullets}
+              visual={f.visual}
               reverse={i % 2 === 1}
             />
           </div>
