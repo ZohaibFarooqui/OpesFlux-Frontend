@@ -3,7 +3,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown, Store, Utensils, Truck, HardHat, Factory, Briefcase } from "lucide-react";
+import {
+  Menu, X, ChevronDown,
+  Store, Utensils, Truck, HardHat, Factory, Briefcase,
+  ShoppingBag, Package, Receipt, Shield, Users, BarChart3,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -26,11 +30,119 @@ const industries = [
   { label: "Professional Services", href: "/industries/professional-services", desc: "Time tracking, retainers, and project billing", icon: "Briefcase" },
 ];
 
+type FeatureItem = { name: string; href: string; desc: string };
+type FeatureCategory = {
+  id: string;
+  name: string;
+  Icon: React.ElementType;
+  color: string;
+  bg: string;
+  dot: string;
+  features: FeatureItem[];
+};
+
+const featureCategories: FeatureCategory[] = [
+  {
+    id: "sales",
+    name: "Sales & Marketing",
+    Icon: ShoppingBag,
+    color: "text-sky-600",
+    bg: "bg-sky-50",
+    dot: "bg-sky-400",
+    features: [
+      { name: "Point of Sale", href: "/features#pos", desc: "Fast checkout with barcode scanning, split payments, and offline mode" },
+      { name: "Sales Orders", href: "/features#sales-orders", desc: "Full pipeline visibility from quote to confirmed delivery" },
+      { name: "Quotes & Estimates", href: "/features#quotes", desc: "Professional quotes with expiry dates and one-click conversion" },
+      { name: "Sales Returns", href: "/features#sales-returns", desc: "Full and partial returns with stock restoration and credit notes" },
+      { name: "Customer CRM", href: "/features#crm", desc: "Records with order history, credit limits, and payment terms" },
+      { name: "Aged Receivables", href: "/features#aged-receivables", desc: "Track overdue invoices by age bucket with automated reminders" },
+      { name: "Loyalty Programme", href: "/features#loyalty", desc: "Earn and redeem customer points at POS to drive repeat business" },
+      { name: "GDPR Tools", href: "/features#gdpr", desc: "Data export, erasure requests, and consent management" },
+    ],
+  },
+  {
+    id: "supply-chain",
+    name: "Supply Chain",
+    Icon: Package,
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+    dot: "bg-emerald-400",
+    features: [
+      { name: "Inventory Management", href: "/features#inventory", desc: "Real-time stock tracking with low stock alerts and auto-reorders" },
+      { name: "Multi-Location Stock", href: "/features#multi-location", desc: "Centralized inventory visibility across all branches and warehouses" },
+      { name: "Stock Transfers", href: "/features#stock-transfers", desc: "Move stock between locations with a full audit trail" },
+      { name: "Batch & Serial Tracking", href: "/features#batch-serial", desc: "Track items by batch or serial number for full traceability" },
+      { name: "Purchase Orders", href: "/features#purchase-orders", desc: "Create and track POs with approval workflows and delivery tracking" },
+      { name: "Supplier Management", href: "/features#suppliers", desc: "Supplier profiles, payment terms, credit limits, and purchase history" },
+    ],
+  },
+  {
+    id: "finance",
+    name: "Finance & Accounting",
+    Icon: Receipt,
+    color: "text-violet-600",
+    bg: "bg-violet-50",
+    dot: "bg-violet-400",
+    features: [
+      { name: "Invoicing", href: "/features#invoicing", desc: "VAT-compliant invoices auto-generated from confirmed orders" },
+      { name: "Payments", href: "/features#payments", desc: "Record payments across cash, card, bank transfer, and credit accounts" },
+      { name: "VAT Management & MTD", href: "/features#vat", desc: "Calculate VAT correctly and file returns digitally to HMRC" },
+      { name: "Chart of Accounts", href: "/features#accounts", desc: "Double-entry bookkeeping with hierarchical structure and trial balance" },
+      { name: "Bank Reconciliation", href: "/features#bank-reconciliation", desc: "Match bank statement transactions to journal entries" },
+      { name: "Open Banking", href: "/features#open-banking", desc: "Auto-import daily bank transactions via Open Banking API" },
+      { name: "Reports & Analytics", href: "/features#reports", desc: "P&L, Balance Sheet, Cash Flow, and 10+ business reports" },
+    ],
+  },
+  {
+    id: "compliance",
+    name: "UK Compliance",
+    Icon: Shield,
+    color: "text-red-600",
+    bg: "bg-red-50",
+    dot: "bg-red-400",
+    features: [
+      { name: "CIS Module", href: "/features#cis", desc: "Auto-calculate subcontractor deductions at 20% or 30% for HMRC" },
+      { name: "IR35 Tool", href: "/features#ir35", desc: "Assess and record contractor IR35 status for due diligence" },
+      { name: "MTD VAT Filing", href: "/features#mtd", desc: "Submit VAT returns directly to HMRC via Making Tax Digital API" },
+    ],
+  },
+  {
+    id: "hr",
+    name: "HR & Payroll",
+    Icon: Users,
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+    dot: "bg-amber-400",
+    features: [
+      { name: "Payroll", href: "/features#payroll", desc: "PAYE, NI, and pension contributions calculated automatically" },
+      { name: "Timesheets", href: "/features#timesheets", desc: "Track employee hours for payroll and labour cost analysis" },
+      { name: "Leave Management", href: "/features#leave", desc: "Manage leave entitlements, requests, and approval workflows" },
+      { name: "Payslips", href: "/features#payslips", desc: "Professional payslips with all statutory deductions visible" },
+    ],
+  },
+  {
+    id: "system",
+    name: "Reports & System",
+    Icon: BarChart3,
+    color: "text-slate-600",
+    bg: "bg-slate-100",
+    dot: "bg-slate-400",
+    features: [
+      { name: "Reports Hub", href: "/features#reports-hub", desc: "All business reports with flexible date and location filters" },
+      { name: "Activity Logs", href: "/features#activity-logs", desc: "Immutable audit trail of every user action for compliance" },
+      { name: "System Settings", href: "/features#settings", desc: "Configure currencies, tax rules, and all business settings" },
+    ],
+  },
+];
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
   const industriesTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const featuresTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -38,12 +150,20 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const openDropdown = () => {
+  const openIndustries = () => {
     if (industriesTimeout.current) clearTimeout(industriesTimeout.current);
     setIndustriesOpen(true);
   };
-  const closeDropdown = () => {
+  const closeIndustries = () => {
     industriesTimeout.current = setTimeout(() => setIndustriesOpen(false), 100);
+  };
+
+  const openFeatures = () => {
+    if (featuresTimeout.current) clearTimeout(featuresTimeout.current);
+    setFeaturesOpen(true);
+  };
+  const closeFeatures = () => {
+    featuresTimeout.current = setTimeout(() => setFeaturesOpen(false), 100);
   };
 
   return (
@@ -72,18 +192,78 @@ export function Header() {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
-              <Link
-                href="/features"
-                className="px-4 py-2 text-sm font-medium text-(--color-text) hover:text-(--color-cyan) transition-colors rounded-lg hover:bg-(--color-mist)"
+
+              {/* Features Mega-menu */}
+              <div
+                className="relative"
+                onMouseEnter={openFeatures}
+                onMouseLeave={closeFeatures}
               >
-                Features
-              </Link>
+                <button
+                  onClick={() => setFeaturesOpen((v) => !v)}
+                  className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-(--color-text) hover:text-(--color-cyan) transition-colors rounded-lg hover:bg-(--color-mist)"
+                  aria-expanded={featuresOpen}
+                  aria-haspopup="true"
+                >
+                  Features
+                  <ChevronDown className={cn("h-4 w-4 transition-transform", featuresOpen && "rotate-180")} />
+                </button>
+
+                {featuresOpen && (
+                  <div
+                    className="absolute top-full left-0 mt-2 w-[700px] bg-white rounded-2xl shadow-[0_12px_40px_-12px_rgba(10,37,64,0.20)] border border-(--color-border) p-4"
+                    onMouseEnter={openFeatures}
+                    onMouseLeave={closeFeatures}
+                  >
+                    <div className="grid grid-cols-3 gap-1">
+                      {featureCategories.map((cat) => (
+                        <div key={cat.id}>
+                          <div className={cn("flex items-center gap-1.5 px-2 py-1.5 mb-0.5 rounded-lg", cat.bg)}>
+                            <cat.Icon className={cn("h-3.5 w-3.5 shrink-0", cat.color)} />
+                            <span className={cn("text-[10px] font-bold uppercase tracking-wider leading-none", cat.color)}>
+                              {cat.name}
+                            </span>
+                          </div>
+                          {cat.features.map((f) => (
+                            <Link
+                              key={f.href}
+                              href={f.href}
+                              className="block px-2 py-1.5 rounded-lg hover:bg-(--color-mist) transition-colors group"
+                              onClick={() => setFeaturesOpen(false)}
+                            >
+                              <div className="flex items-center gap-1.5">
+                                <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", cat.dot)} />
+                                <span className="text-[12.5px] font-medium text-(--color-deep-blue) group-hover:text-(--color-cyan) leading-tight">
+                                  {f.name}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-(--color-muted) leading-snug mt-0.5 ml-3 line-clamp-2">
+                                {f.desc}
+                              </p>
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-(--color-border) flex items-center justify-between">
+                      <span className="text-xs text-(--color-muted)">31 modules. One platform.</span>
+                      <Link
+                        href="/features"
+                        className="text-xs font-semibold text-(--color-cyan) hover:underline"
+                        onClick={() => setFeaturesOpen(false)}
+                      >
+                        See full feature list →
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Industries Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={openDropdown}
-                onMouseLeave={closeDropdown}
+                onMouseEnter={openIndustries}
+                onMouseLeave={closeIndustries}
               >
                 <button
                   onClick={() => setIndustriesOpen((v) => !v)}
@@ -98,8 +278,8 @@ export function Header() {
                 {industriesOpen && (
                   <div
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white rounded-2xl shadow-[0_12px_40px_-12px_rgba(10,37,64,0.16)] border border-(--color-border) p-3"
-                    onMouseEnter={openDropdown}
-                    onMouseLeave={closeDropdown}
+                    onMouseEnter={openIndustries}
+                    onMouseLeave={closeIndustries}
                   >
                     {industries.map((item) => (
                       <Link
@@ -182,8 +362,38 @@ export function Header() {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-2">
+            {/* Features expandable */}
+            <button
+              className="flex items-center justify-between px-4 py-3 text-lg font-medium text-(--color-deep-blue) hover:text-(--color-cyan) hover:bg-(--color-mist) rounded-xl transition-colors w-full text-left"
+              onClick={() => setMobileFeaturesOpen((v) => !v)}
+            >
+              Features
+              <ChevronDown className={cn("h-5 w-5 transition-transform", mobileFeaturesOpen && "rotate-180")} />
+            </button>
+            {mobileFeaturesOpen && (
+              <div className="ml-4 flex flex-col gap-0.5 mb-2">
+                {featureCategories.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href={`/features#${cat.id}`}
+                    className="flex items-center gap-3 px-4 py-2 text-(--color-text) hover:text-(--color-cyan) hover:bg-(--color-mist) rounded-xl transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <cat.Icon className={cn("h-4 w-4 shrink-0", cat.color)} />
+                    <span className="text-sm font-medium">{cat.name}</span>
+                  </Link>
+                ))}
+                <Link
+                  href="/features"
+                  className="px-4 py-2 text-sm font-semibold text-(--color-cyan) hover:bg-(--color-mist) rounded-xl transition-colors mt-1"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  See all features →
+                </Link>
+              </div>
+            )}
+
             {[
-              { label: "Features", href: "/features" },
               { label: "Pricing", href: "/pricing" },
               { label: "Blog", href: "/blog" },
               { label: "About", href: "/about" },
@@ -198,6 +408,7 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+
             <div className="mt-2 border-t border-(--color-border) pt-4 text-sm text-(--color-muted) uppercase tracking-wider font-medium px-4">Industries</div>
             {industries.map((item) => (
               <Link
