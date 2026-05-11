@@ -1,10 +1,10 @@
 import { config, collection, fields } from "@keystatic/core";
 
 export default config({
-  storage: process.env.KEYSTATIC_GITHUB_REPO
+  storage: process.env.NODE_ENV === "production"
     ? {
         kind: "github",
-        repo: process.env.KEYSTATIC_GITHUB_REPO as `${string}/${string}`,
+        repo: "ZohaibFarooqui/OpesFlux-Frontend" as `${string}/${string}`,
       }
     : { kind: "local" },
   ui: {
