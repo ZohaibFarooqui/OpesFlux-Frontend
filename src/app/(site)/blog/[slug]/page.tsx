@@ -11,13 +11,10 @@ import { Badge } from "@/components/ui/badge";
 import { MarkdownContent } from "@/components/blog/MarkdownContent";
 import { siteConfig } from "@/config/site";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{ slug: string }>;
-};
-
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
