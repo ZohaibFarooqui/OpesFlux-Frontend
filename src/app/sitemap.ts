@@ -1,8 +1,8 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { INDUSTRIES_LIST } from "@/config/industries";
 
 const BASE = "https://opesflux.devsandvisuals.com";
-const industries = ["retail", "restaurants", "wholesale", "construction", "professional-services"];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
@@ -18,8 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/case-studies`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    ...industries.map((slug) => ({
-      url: `${BASE}/industries/${slug}`,
+    ...INDUSTRIES_LIST.map((i) => ({
+      url: `${BASE}/industries/${i.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
