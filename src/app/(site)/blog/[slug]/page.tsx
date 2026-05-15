@@ -6,7 +6,7 @@ import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/blog";
 import { ShareButtons } from "@/components/blog/ShareButtons";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
-import { ArticleJsonLd } from "@/components/seo/JsonLd";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { Badge } from "@/components/ui/badge";
 import { MarkdownContent } from "@/components/blog/MarkdownContent";
 import { siteConfig } from "@/config/site";
@@ -62,6 +62,13 @@ export default async function BlogPostPage({ params }: Props) {
         datePublished={post.date}
         dateModified={post.updated}
         authorName={post.author.name}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: siteConfig.url },
+          { name: "Blog", url: `${siteConfig.url}/blog` },
+          { name: post.title, url },
+        ]}
       />
 
       <div className="pt-32 pb-20 bg-white">

@@ -9,9 +9,63 @@ export function OrganizationJsonLd() {
     alternateName: "OpesFlux ERP",
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
+    image: `${siteConfig.url}/logo.png`,
+    description:
+      "All-in-one ERP and POS platform. POS, inventory, accounting, payroll, and tax compliance in one system for any business.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Kington",
+      addressLocality: "Kington",
+      addressRegion: "England",
+      addressCountry: "GB",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: siteConfig.phone,
+        email: siteConfig.email,
+        contactType: "sales",
+        areaServed: "Worldwide",
+        availableLanguage: ["English"],
+      },
+      {
+        "@type": "ContactPoint",
+        email: siteConfig.email,
+        contactType: "customer support",
+        availableLanguage: ["English"],
+      },
+    ],
+    knowsAbout: [
+      "ERP software",
+      "Point of Sale",
+      "Inventory Management",
+      "Accounting Software",
+      "Payroll Software",
+      "VAT and Making Tax Digital",
+      "Business Management Software",
+    ],
     sameAs: [siteConfig.social.linkedin, siteConfig.social.facebook, siteConfig.social.instagram],
   };
 
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string }[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
   return (
     <script
       type="application/ld+json"
