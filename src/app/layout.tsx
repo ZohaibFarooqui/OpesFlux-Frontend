@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { OrganizationJsonLd } from "@/components/seo/JsonLd";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
 
 const inter = Inter({
@@ -12,6 +12,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  applicationName: "OpesFlux",
   title: {
     default: "OpesFlux — All-in-One ERP & POS for Modern Business",
     template: "%s | OpesFlux",
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} h-full antialiased`}>
       <head>
         <OrganizationJsonLd />
+        <WebSiteJsonLd />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
       </head>
       <body className="min-h-full flex flex-col text-(--color-text)">

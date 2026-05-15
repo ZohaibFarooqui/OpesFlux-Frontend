@@ -6,16 +6,33 @@ export function OrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "OpesFlux",
+    alternateName: "OpesFlux ERP",
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
-    sameAs: [siteConfig.social.linkedin, siteConfig.social.twitter],
-    parentOrganization: {
-      "@type": "Organization",
-      name: "Devs and Visuals",
-      url: siteConfig.parentCompany.url,
-    },
+    sameAs: [siteConfig.social.linkedin, siteConfig.social.facebook, siteConfig.social.instagram],
   };
 
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function WebSiteJsonLd() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "OpesFlux",
+    alternateName: "OpesFlux ERP",
+    url: siteConfig.url,
+    publisher: {
+      "@type": "Organization",
+      name: "OpesFlux",
+      logo: `${siteConfig.url}/logo.png`,
+    },
+  };
   return (
     <script
       type="application/ld+json"
