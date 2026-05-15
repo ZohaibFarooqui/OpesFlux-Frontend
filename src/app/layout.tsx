@@ -13,11 +13,17 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "OpesFlux — Your Work Flow Companion | Global ERP & POS",
+    default: "OpesFlux — All-in-One ERP & POS for Modern Business",
     template: "%s | OpesFlux",
   },
   description:
-    "OpesFlux is the all-in-one ERP and POS platform for businesses worldwide. POS, inventory, accounting, payroll, and compliance in one system.",
+    "All-in-one ERP and POS platform. POS, inventory, accounting, payroll, and compliance in one system for any business.",
+  alternates: {
+    languages: {
+      "x-default": siteConfig.url,
+      en: siteConfig.url,
+    },
+  },
   openGraph: {
     siteName: "OpesFlux",
     locale: "en_US",

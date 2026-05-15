@@ -12,13 +12,13 @@ import { CTASection } from "@/components/sections/CTASection";
 import { SoftwareAppJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "OpesFlux — Run Your Business in Flow | Global ERP & POS",
+  title: "OpesFlux — All-in-One ERP & POS Platform",
   description:
-    "OpesFlux is the all-in-one ERP and POS platform for businesses worldwide. POS, inventory, accounting, payroll, and tax compliance in one system. Book a free demo today.",
+    "POS, inventory, accounting, payroll, and tax compliance in one platform — for businesses of any size. Book a free demo.",
   openGraph: {
-    title: "OpesFlux — Run Your Business in Flow | Global ERP & POS",
+    title: "OpesFlux — All-in-One ERP & POS Platform",
     description:
-      "OpesFlux is the all-in-one ERP and POS platform for businesses worldwide. POS, inventory, accounting, payroll, and tax compliance in one system.",
+      "POS, inventory, accounting, payroll, and tax compliance in one platform — for businesses of any size.",
     url: "https://opesflux.devsandvisuals.com",
     type: "website",
   },
