@@ -83,7 +83,7 @@ export default function AboutPage() {
       </div>
 
       {/* Team */}
-      <div className="py-20 bg-white">
+      {/* <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <h2 className="text-3xl font-semibold text-(--color-deep-blue) tracking-tight text-center mb-12">Meet the team</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -99,7 +99,7 @@ export default function AboutPage() {
           </div>
           <p className="text-center text-sm text-(--color-muted) mt-8">Team photos and full bios coming soon.</p>
         </div>
-      </div>
+      </div> */}
 
       {/* Parent company */}
       <div className="py-16 bg-(--color-cream)">
