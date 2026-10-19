@@ -136,7 +136,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="border-t border-(--color-cream)/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-(--color-cream)/50">
-            © 2026 Devs and Visuals Ltd. All rights reserved.
+            © 2026 Devs and Visuals. All rights reserved.
           </p>
           <p className="text-sm text-(--color-cream)/50">
             Built by{" "}

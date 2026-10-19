@@ -30,7 +30,7 @@ const EMAIL_HEADER = `
 const EMAIL_FOOTER = `
   <div style="background:#f8fafc; padding:16px 32px; text-align:center; border-top:1px solid #e2e8f0;">
     <img src="${emailLogoDataUri}" alt="" width="24" height="24" style="display:inline-block; vertical-align:middle; margin-right:8px; opacity:0.5;" />
-    <span style="color:#94a3b8; font-size:12px; vertical-align:middle;">© 2026 Devs and Visuals Ltd ·
+    <span style="color:#94a3b8; font-size:12px; vertical-align:middle;">© 2026 Devs and Visuals ·
       <a href="${SITE_URL}/privacy" style="color:#94a3b8;">Privacy Policy</a>
     </span>
   </div>`;

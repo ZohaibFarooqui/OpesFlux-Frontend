@@ -8,9 +8,9 @@ export const siteConfig = {
   ogImage: "/og-default.png",
   logo: "/logo.png",
   logoIcon: "/logo.png",
-  email: "hello@opesflux.devsandvisuals.com",
+  email: "hello.opesflux@devsandvisuals.com",
   phone: "+44 7490 350688",
-  address: "Devs and Visuals Ltd, Kington, England",
+  address: "Devs and Visuals, Kington, England",
   social: {
     linkedin: "https://www.linkedin.com/company/devs-and-visuals/",
     facebook: "https://www.facebook.com/profile.php?id=61571742365103",

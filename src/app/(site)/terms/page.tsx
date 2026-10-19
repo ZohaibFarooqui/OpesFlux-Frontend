@@ -14,9 +14,9 @@ const sections = [
   { id: "data", title: "Your data", content: "You retain ownership of all data you input into OpesFlux. We process your data as a data processor on your behalf in accordance with our Data Processing Agreement and Privacy Policy. We will not access your data except to provide the service or as required by law." },
   { id: "availability", title: "Service availability", content: "We aim to maintain 99.9% uptime but do not guarantee uninterrupted service. Scheduled maintenance will be communicated in advance. We are not liable for any downtime caused by circumstances beyond our reasonable control." },
   { id: "termination", title: "Termination", content: "You may cancel your subscription at any time. Cancellation takes effect at the end of your current billing period. We reserve the right to terminate accounts that violate these terms or engage in fraudulent activity." },
-  { id: "liability", title: "Limitation of liability", content: "To the maximum extent permitted by law, Devs and Visuals Ltd shall not be liable for any indirect, incidental, special, or consequential damages. Our total liability to you shall not exceed the subscription fees paid by you in the three months prior to the claim." },
+  { id: "liability", title: "Limitation of liability", content: "To the maximum extent permitted by law, Devs and Visuals shall not be liable for any indirect, incidental, special, or consequential damages. Our total liability to you shall not exceed the subscription fees paid by you in the three months prior to the claim." },
   { id: "governing", title: "Governing law", content: "These Terms shall be governed by and construed in accordance with the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales." },
-  { id: "contact", title: "Contact", content: "For any questions about these Terms, please contact hello@opesflux.devsandvisuals.com." },
+  { id: "contact", title: "Contact", content: "For any questions about these Terms, please contact hello.opesflux@devsandvisuals.com." },
 ];
 
 export default function TermsPage() {
