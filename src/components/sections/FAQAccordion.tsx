@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Can I pay in my local currency?",
-    a: "Yes. While prices are displayed in USD, we support billing in your local currency on all plans. Contact us after signing up or during demo booking to arrange local currency billing.",
+    a: "Yes. Prices are displayed in GBP, and we support billing in your local currency on all plans. Contact us after signing up or during demo booking to arrange local currency billing.",
   },
   {
     q: "What tax and payroll systems does OpesFlux support?",

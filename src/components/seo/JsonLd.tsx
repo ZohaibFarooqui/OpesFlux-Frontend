@@ -102,7 +102,7 @@ export function SoftwareAppJsonLd() {
     name: "OpesFlux",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
-    offers: { "@type": "Offer", price: "49", priceCurrency: "USD" },
+    offers: { "@type": "Offer", price: "19", priceCurrency: "GBP" },
     availableLanguage: "en",
   };
   return (

@@ -9,7 +9,7 @@ import { PRICING_TIERS, COMPARISON_FEATURES } from "@/config/pricing";
 export const metadata: Metadata = {
   title: "Pricing — Simple Plans for Any Business | OpesFlux",
   description:
-    "OpesFlux pricing: Starter from $49/month. Growth $129/month. Enterprise $299/month. Multi-currency. Cancel anytime. Free 7-day trial.",
+    "OpesFlux pricing: Starter from £19/month. Growth £49/month. Enterprise £99/month. Multi-currency. Cancel anytime. Free 7-day trial.",
   alternates: { canonical: "https://opesflux.devsandvisuals.com/pricing" },
 };
 
@@ -19,7 +19,7 @@ const faqData = [
   { q: "What happens during the free trial?", a: "Full access for 7 days. No credit card required. We won't charge you automatically." },
   { q: "Is my data safe and backed up?", a: "Yes. GDPR-compliant, encrypted in transit and at rest. Daily automated backups." },
   { q: "Do you charge per location or per user?", a: "Both — Starter: 1 location, 3 users. Growth: 5 locations, 15 users. Enterprise: unlimited both." },
-  { q: "Can I pay in my local currency?", a: "Yes. Prices shown in USD; local currency billing available on all plans." },
+  { q: "Can I pay in my local currency?", a: "Yes. Prices are shown in GBP; billing in other currencies is available on all plans." },
   { q: "What tax and payroll systems does OpesFlux support?", a: "Any jurisdiction — UK, UAE, Pakistan, India, USA, Australia, and more. All rates are database-configurable." },
   { q: "How does the compliance module work for my country?", a: "Select your jurisdiction during onboarding. OpesFlux loads your local tax rates and filing schedules automatically." },
   { q: "Can I import data from another system?", a: "Yes — from Xero, QuickBooks, Sage, and most POS systems via CSV or API." },
@@ -87,7 +87,7 @@ export default function PricingPage() {
             </table>
           </div>
           <p className="text-center text-xs text-(--color-muted) mt-4">
-            Prices shown in USD. Local currency billing available on all plans.
+            Prices shown in GBP. Billing in other currencies available on all plans.
           </p>
         </div>
       </div>

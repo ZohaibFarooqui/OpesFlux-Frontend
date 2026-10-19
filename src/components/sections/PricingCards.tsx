@@ -102,7 +102,7 @@ export function PricingCards() {
       </div>
 
       <p className="text-center text-xs text-(--color-muted) mt-6">
-        Prices shown in USD. Local currency billing available on all plans.
+        Prices shown in GBP. Billing in other currencies available on all plans.
       </p>
     </div>
   );

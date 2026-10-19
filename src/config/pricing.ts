@@ -18,9 +18,9 @@ export type PricingTier = {
 export const PRICING_TIERS: PricingTier[] = [
   {
     name: "Starter",
-    price: { monthly: 49, annual: 470 },
-    currency: "USD",
-    currencySymbol: "$",
+    price: { monthly: 19, annual: 182 },
+    currency: "GBP",
+    currencySymbol: "£",
     note: "Local currency billing available",
     highlighted: false,
     users: "Up to 3 users",
@@ -43,9 +43,9 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     name: "Growth",
-    price: { monthly: 129, annual: 1238 },
-    currency: "USD",
-    currencySymbol: "$",
+    price: { monthly: 49, annual: 470 },
+    currency: "GBP",
+    currencySymbol: "£",
     note: "Local currency billing available",
     badge: "Most Popular",
     highlighted: true,
@@ -68,9 +68,9 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     name: "Enterprise",
-    price: { monthly: 299, annual: 2870 },
-    currency: "USD",
-    currencySymbol: "$",
+    price: { monthly: 99, annual: 950 },
+    currency: "GBP",
+    currencySymbol: "£",
     note: "Local currency billing available",
     highlighted: false,
     users: "Unlimited users",
