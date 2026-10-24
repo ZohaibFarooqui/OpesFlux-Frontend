@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-(--color-cyan) text-white font-semibold hover:bg-(--color-cyan-soft) shadow-sm hover:shadow-[0_8px_24px_-8px_rgba(32,181,162,0.45)]",
+          "bg-(--color-cyan-ink) text-white font-semibold hover:bg-(--color-deep-blue-soft) shadow-sm hover:shadow-[0_8px_24px_-8px_rgba(32,181,162,0.45)]",
         secondary:
           "bg-(--color-deep-blue) text-white hover:bg-(--color-deep-blue-soft)",
         outline:
@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "bg-transparent text-(--color-text-strong) hover:bg-(--color-mist)",
         "ghost-white":
           "bg-transparent text-white border border-white/30 hover:bg-white/10",
-        link: "text-(--color-cyan) underline-offset-4 hover:underline p-0 h-auto",
+        link: "text-(--color-cyan-ink) underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {
         sm: "h-8 px-3 text-xs",

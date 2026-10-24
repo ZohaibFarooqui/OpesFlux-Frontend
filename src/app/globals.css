@@ -5,6 +5,7 @@
   --color-deep-blue-soft: #1A3556;
   --color-cyan: #00C2FF;
   --color-cyan-soft: #66D9FF;
+  --color-cyan-ink: #0369A1; /* accessible text/button shade of the brand cyan (5.9:1 on white) */
   --color-blue: #2563EB;
   --color-cream: #F8FAFC;
   --color-mist: #F1F5F9;
@@ -23,6 +24,7 @@
   --color-deep-blue-soft: #1A3556;
   --color-cyan: #00C2FF;
   --color-cyan-soft: #66D9FF;
+  --color-cyan-ink: #0369A1; /* accessible text/button shade of the brand cyan (5.9:1 on white) */
   --color-cyan-glow: rgba(0, 194, 255, 0.12);
   --color-blue: #2563EB;
   --color-cream: #F8FAFC;
