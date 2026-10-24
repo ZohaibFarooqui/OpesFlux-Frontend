@@ -1,0 +1,33 @@
+# Runs on every push and pull request: blocks false product claims and
+# build breakages from reaching main (and so from reaching production).
+name: Site checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Claims guard (no false or unverifiable product claims)
+        run: node scripts/check-claims.mjs
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://opesflux.devsandvisuals.com

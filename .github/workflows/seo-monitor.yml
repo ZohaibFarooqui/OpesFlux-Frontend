@@ -1,0 +1,58 @@
+# Weekly health check of the live site, plus Lighthouse on the key pages.
+# If anything is wrong it opens (or updates) one GitHub issue with the list.
+name: SEO monitor
+
+on:
+  schedule:
+    # Every Monday 06:00 UTC
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Crawl the live site
+        id: crawl
+        continue-on-error: true
+        run: node scripts/seo-monitor.mjs
+
+      - name: Lighthouse (mobile) on home, pricing and contact
+        continue-on-error: true
+        run: |
+          echo "## Lighthouse (mobile)" >> seo-report.md
+          echo "" >> seo-report.md
+          echo "| Page | Performance | Accessibility | Best practices | SEO |" >> seo-report.md
+          echo "| --- | --- | --- | --- | --- |" >> seo-report.md
+          for p in "" pricing contact; do
+            npx -y lighthouse@13.5.0 "https://opesflux.devsandvisuals.com/$p" --output=json --output-path=lh.json \
+              --chrome-flags="--headless=new --no-sandbox" --quiet || continue
+            node -e 'const c=require("./lh.json").categories;const s=k=>Math.round(c[k].score*100);console.log(`| /'"$p"' | ${s("performance")} | ${s("accessibility")} | ${s("best-practices")} | ${s("seo")} |`)' >> seo-report.md
+          done
+
+      - name: Job summary
+        if: always()
+        run: cat seo-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open or update an issue when something needs fixing
+        if: steps.crawl.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="SEO monitor: problems found"
+          existing=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file seo-report.md
+          else
+            gh issue create --title "$title" --body-file seo-report.md
+          fi
