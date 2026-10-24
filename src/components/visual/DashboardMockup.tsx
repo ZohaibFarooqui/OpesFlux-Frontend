@@ -72,7 +72,7 @@ export function DashboardMockup() {
                 </div>
                 <div className="flex items-center gap-1 mt-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-(--color-cyan) animate-cyan-pulse" />
-                  <span className="text-xs text-(--color-success)">+12%</span>
+                  <span className="text-xs text-emerald-700">+12%</span>
                 </div>
               </div>
               <div className="bg-white rounded-xl p-3 border border-(--color-border)">
@@ -122,7 +122,7 @@ export function DashboardMockup() {
                     <span className="text-(--color-muted) font-mono">{order.id}</span>
                     <span className="text-(--color-text) flex-1 ml-2 truncate">{order.customer}</span>
                     <span className="font-medium text-(--color-deep-blue) mr-2">{order.amount}</span>
-                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${order.status === "Paid" ? "bg-(--color-success)/10 text-(--color-success)" : "bg-(--color-warning)/10 text-(--color-warning)"}`}>
+                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${order.status === "Paid" ? "bg-(--color-success)/10 text-emerald-700" : "bg-(--color-warning)/10 text-amber-700"}`}>
                       {order.status}
                     </span>
                   </div>
