@@ -34,6 +34,25 @@ const socialLinks = [
   { href: siteConfig.social.instagram, label: "Instagram", Icon: InstagramIcon },
 ];
 
+// Column labels are plain text, not headings: they repeat on every page and
+// would clutter each page's heading outline.
+function FooterColumn({ title, items }: { title: string; items: { label: string; href: string }[] }) {
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-wider text-(--color-cream)/60 mb-4">{title}</p>
+      <ul className="space-y-3">
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} className="text-sm text-(--color-cream)/80 hover:text-(--color-cyan) transition-colors">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="bg-(--color-deep-blue) text-(--color-cream)">
@@ -49,7 +68,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-(--color-cream)/70 text-sm leading-relaxed mb-6 max-w-xs">
-              The all-in-one ERP and POS platform for businesses worldwide. POS, inventory, accounting, payroll, and tax compliance in one system.
+              OpesFlux, a product of Devs and Visuals. Point of sale, stock control, purchasing, invoicing, accounts and payroll in one system for UK wholesalers, distributors and multi-site shops.
             </p>
             <div className="flex items-center gap-3 mb-6">
               {socialLinks.map(({ href, label, Icon }) => (
@@ -76,61 +95,17 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Product */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-(--color-cream)/50 mb-4">Product</h3>
-            <ul className="space-y-3">
-              {footerNav.product.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="text-sm text-(--color-cream)/70 hover:text-(--color-cyan) transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Industries */}
+          <FooterColumn title="Industries" items={footerNav.industries} />
+
+          {/* Product + Compare */}
+          <div className="space-y-8">
+            <FooterColumn title="Product" items={footerNav.product} />
+            <FooterColumn title="Compare" items={footerNav.compare} />
           </div>
 
           {/* Company */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-(--color-cream)/50 mb-4">Company</h3>
-            <ul className="space-y-3">
-              {footerNav.company.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="text-sm text-(--color-cream)/70 hover:text-(--color-cyan) transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources & Legal */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-(--color-cream)/50 mb-4">Resources</h3>
-              <ul className="space-y-3">
-                {footerNav.resources.map((item) => (
-                  <li key={item.label}>
-                    <Link href={item.href} className="text-sm text-(--color-cream)/70 hover:text-(--color-cyan) transition-colors">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-(--color-cream)/50 mb-4">Legal</h3>
-              <ul className="space-y-3">
-                {footerNav.legal.map((item) => (
-                  <li key={item.label}>
-                    <Link href={item.href} className="text-sm text-(--color-cream)/70 hover:text-(--color-cyan) transition-colors">
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <FooterColumn title="Company" items={footerNav.company} />
         </div>
 
         {/* Bottom */}

@@ -5,30 +5,20 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Menu, X, ChevronDown,
-  Store, Utensils, Truck, HardHat, Factory, Briefcase,
   ShoppingBag, Package, Receipt, Users, BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IndustryIcon } from "@/components/sections/IndustryIcon";
 import { siteConfig } from "@/config/site";
+import { INDUSTRIES_LIST } from "@/config/industries";
 import { cn } from "@/lib/utils";
 
-const industryIcons: Record<string, React.ReactNode> = {
-  Store: <Store className="h-5 w-5" />,
-  Utensils: <Utensils className="h-5 w-5" />,
-  Truck: <Truck className="h-5 w-5" />,
-  HardHat: <HardHat className="h-5 w-5" />,
-  Factory: <Factory className="h-5 w-5" />,
-  Briefcase: <Briefcase className="h-5 w-5" />,
-};
-
-const industries = [
-  { label: "Retail", href: "/industries/retail", desc: "POS, stock, and loyalty for shops of any size", icon: "Store" },
-  { label: "Restaurants", href: "/industries/restaurants", desc: "Table management, kitchen flow, and shift payroll", icon: "Utensils" },
-  { label: "Wholesale", href: "/industries/wholesale", desc: "Purchase orders, pricing tiers, and logistics", icon: "Truck" },
-  { label: "Construction", href: "/industries/construction", desc: "Job costing, subcontractors, and compliance", icon: "HardHat" },
-  { label: "Manufacturing", href: "/industries/manufacturing", desc: "Production runs, BOMs, and supply chain control", icon: "Factory" },
-  { label: "Professional Services", href: "/industries/professional-services", desc: "Time tracking, retainers, and project billing", icon: "Briefcase" },
-];
+const industries = INDUSTRIES_LIST.map((i) => ({
+  label: i.name,
+  href: `/industries/${i.slug}`,
+  desc: i.navDesc,
+  icon: i.icon,
+}));
 
 type FeatureItem = { name: string; href: string };
 type FeatureCategory = {
@@ -44,67 +34,60 @@ type FeatureCategory = {
 const featureCategories: FeatureCategory[] = [
   {
     id: "sales",
-    name: "Sales & Marketing",
+    name: "Sales",
     Icon: ShoppingBag,
     color: "text-sky-600",
     features: [
       { name: "Point of Sale", href: "/features#pos" },
-      { name: "Sales Orders & Quotes", href: "/features#sales" },
-      { name: "Customer CRM", href: "/features#sales" },
-      { name: "Aged Receivables", href: "/features#sales" },
-      { name: "Loyalty Programme", href: "/features#sales" },
-      { name: "GDPR Tools", href: "/features#sales" },
+      { name: "Quotes & Sales Orders", href: "/features#sales" },
+      { name: "Invoices & Credit Control", href: "/features#sales" },
+      { name: "Customer Portal", href: "/features#sales" },
     ],
   },
   {
     id: "supply-chain",
-    name: "Supply Chain",
+    name: "Stock & Purchasing",
     Icon: Package,
     color: "text-emerald-600",
     features: [
-      { name: "Inventory Management", href: "/features#inventory" },
-      { name: "Multi-Location Stock", href: "/features#inventory" },
-      { name: "Stock Transfers", href: "/features#inventory" },
-      { name: "Batch & Serial Tracking", href: "/features#inventory" },
-      { name: "Purchase Orders", href: "/features#purchasing" },
-      { name: "Supplier Management", href: "/features#purchasing" },
+      { name: "Stock Control", href: "/features#inventory" },
+      { name: "Multi-Location Stock & Transfers", href: "/features#inventory" },
+      { name: "Purchase Orders & Approvals", href: "/features#purchasing" },
+      { name: "Goods Received Notes", href: "/features#purchasing" },
     ],
   },
   {
     id: "finance",
-    name: "Finance & Accounting",
+    name: "Accounts",
     Icon: Receipt,
     color: "text-violet-600",
     features: [
-      { name: "Invoicing & Payments", href: "/features#accounting" },
-      { name: "VAT Management & MTD", href: "/features#accounting" },
-      { name: "Chart of Accounts", href: "/features#accounting" },
-      { name: "Bank Reconciliation", href: "/features#accounting" },
-      { name: "Open Banking", href: "/features#accounting" },
-      { name: "Reports & Analytics", href: "/features#accounting" },
+      { name: "Double-Entry Accounts", href: "/features#accounting" },
+      { name: "VAT Return Figures", href: "/features#accounting" },
+      { name: "Bank Reconciliation & Open Banking", href: "/features#accounting" },
+      { name: "Multi-Currency & Multi-Company", href: "/features#accounting" },
     ],
   },
   {
     id: "hr",
-    name: "HR & Payroll",
+    name: "Staff & Payroll",
     Icon: Users,
     color: "text-amber-600",
     features: [
-      { name: "Payroll", href: "/features#payroll" },
-      { name: "Timesheets", href: "/features#payroll" },
-      { name: "Leave Management", href: "/features#payroll" },
-      { name: "Payslips", href: "/features#payroll" },
+      { name: "Rotas & Attendance", href: "/features#payroll" },
+      { name: "Leave", href: "/features#payroll" },
+      { name: "UK Payroll & Payslips", href: "/features#payroll" },
     ],
   },
   {
     id: "system",
-    name: "Reports & System",
+    name: "Compare",
     Icon: BarChart3,
     color: "text-slate-600",
     features: [
-      { name: "Reports Hub", href: "/features" },
-      { name: "Activity Logs", href: "/features" },
-      { name: "System Settings", href: "/features" },
+      { name: "OpesFlux vs Sage 50", href: "/compare/sage-50" },
+      { name: "OpesFlux vs Xero", href: "/compare/xero-and-spreadsheets" },
+      { name: "All comparisons", href: "/compare" },
     ],
   },
 ];
@@ -215,10 +198,10 @@ export function Header() {
                       ))}
                     </div>
                     <div className="mt-5 pt-4 border-t border-(--color-border) flex items-center justify-between">
-                      <span className="text-xs text-(--color-muted)">31 modules. One platform.</span>
+                      <span className="text-xs text-(--color-muted)">One system, one login.</span>
                       <Link
                         href="/features"
-                        className="text-xs font-semibold text-(--color-cyan) hover:underline"
+                        className="text-xs font-semibold text-(--color-cyan-ink) hover:underline"
                         onClick={() => setFeaturesOpen(false)}
                       >
                         See full feature list →
@@ -246,7 +229,7 @@ export function Header() {
 
                 {industriesOpen && (
                   <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 bg-white rounded-2xl shadow-[0_12px_40px_-12px_rgba(10,37,64,0.16)] border border-(--color-border) p-3"
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[38rem] grid grid-cols-2 gap-1 bg-white rounded-2xl shadow-[0_12px_40px_-12px_rgba(10,37,64,0.16)] border border-(--color-border) p-3"
                     onMouseEnter={openIndustries}
                     onMouseLeave={closeIndustries}
                   >
@@ -257,8 +240,8 @@ export function Header() {
                         className="flex items-start gap-3 p-3 rounded-xl hover:bg-(--color-mist) transition-colors group"
                         onClick={() => setIndustriesOpen(false)}
                       >
-                        <div className="mt-0.5 w-8 h-8 rounded-lg bg-cyan/10 flex items-center justify-center text-(--color-cyan) shrink-0">
-                          {industryIcons[item.icon]}
+                        <div className="mt-0.5 w-8 h-8 rounded-lg bg-cyan/10 flex items-center justify-center text-(--color-deep-blue) shrink-0">
+                          <IndustryIcon name={item.icon} />
                         </div>
                         <div>
                           <div className="text-sm font-medium text-(--color-deep-blue) group-hover:text-(--color-cyan)">{item.label}</div>
@@ -277,10 +260,16 @@ export function Header() {
                 Pricing
               </Link>
               <Link
+                href="/compare"
+                className="px-4 py-2 text-sm font-medium text-(--color-text) hover:text-(--color-cyan) transition-colors rounded-lg hover:bg-(--color-mist)"
+              >
+                Compare
+              </Link>
+              <Link
                 href="/blog"
                 className="px-4 py-2 text-sm font-medium text-(--color-text) hover:text-(--color-cyan) transition-colors rounded-lg hover:bg-(--color-mist)"
               >
-                Blog
+                Guides
               </Link>
               <Link
                 href="/about"
@@ -354,7 +343,7 @@ export function Header() {
                 ))}
                 <Link
                   href="/features"
-                  className="px-4 py-2 text-sm font-semibold text-(--color-cyan) hover:bg-(--color-mist) rounded-xl transition-colors mt-1"
+                  className="px-4 py-2 text-sm font-semibold text-(--color-cyan-ink) hover:bg-(--color-mist) rounded-xl transition-colors mt-1"
                   onClick={() => setMobileOpen(false)}
                 >
                   See all features →
@@ -364,7 +353,9 @@ export function Header() {
 
             {[
               { label: "Pricing", href: "/pricing" },
-              { label: "Blog", href: "/blog" },
+              { label: "Compare", href: "/compare" },
+              { label: "Guides", href: "/blog" },
+              { label: "Accountant partners", href: "/partners" },
               { label: "About", href: "/about" },
               { label: "Contact", href: "/contact" },
             ].map((item) => (
@@ -386,7 +377,7 @@ export function Header() {
                 className="flex items-center gap-3 px-4 py-2 text-(--color-text) hover:text-(--color-cyan) hover:bg-(--color-mist) rounded-xl transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                <span className="text-(--color-cyan)">{industryIcons[item.icon]}</span>
+                <span className="text-(--color-deep-blue)"><IndustryIcon name={item.icon} /></span>
                 {item.label}
               </Link>
             ))}
