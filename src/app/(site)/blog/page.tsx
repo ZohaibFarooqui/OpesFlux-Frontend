@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { NewsletterCTA } from "@/components/blog/NewsletterCTA";
 import { getAllPosts } from "@/lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
-
-export const metadata: Metadata = {
-  title: "OpesFlux Insights — Practical Guides for UK Businesses",
+export const metadata = pageMetadata({
+  title: "Guides for UK Shops and Wholesalers",
   description:
-    "Practical, UK-specific guides on MTD VAT, payroll, inventory, and growing your business with the right tools. Updated weekly.",
-  alternates: { canonical: "https://opesflux.devsandvisuals.com/blog" },
-};
+    "Plain-English guides on stock control, EPOS, invoicing, VAT and payroll for UK wholesalers, distributors and multi-site shops.",
+  path: "/blog",
+});
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
-  const featuredPost = posts.find((p) => p.featured);
-  const regularPosts = posts.filter((p) => !p.featured);
+  // One hero card, then every other post. Several posts can be marked featured;
+  // only the newest becomes the hero and the rest stay in the grid.
+  const featuredPost = posts.find((p) => p.featured) ?? posts[0];
+  const otherPosts = posts.filter((p) => p.slug !== featuredPost?.slug);
 
   return (
     <>
@@ -23,10 +23,10 @@ export default async function BlogPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-semibold text-(--color-deep-blue) leading-tight tracking-tight mb-4">
-              OpesFlux Insights
+              Guides for UK shops and wholesalers
             </h1>
             <p className="text-lg text-(--color-muted) leading-[1.7]">
-              Practical guides on UK business management, compliance, and growing efficiently.
+              Practical, plain-English guides on stock control, EPOS, invoicing, VAT and payroll.
             </p>
           </div>
         </div>
@@ -36,33 +36,27 @@ export default async function BlogPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {posts.length === 0 ? (
             <div className="text-center py-24 rounded-2xl bg-(--color-cream) border border-(--color-border)">
-              <p className="text-2xl font-semibold text-(--color-deep-blue) mb-2">Posts coming soon</p>
-              <p className="text-(--color-muted)">We&apos;re writing our first guides on UK compliance, MTD VAT, and more.</p>
+              <p className="text-2xl font-semibold text-(--color-deep-blue) mb-2">Guides coming soon</p>
             </div>
           ) : (
             <>
-              {/* Featured post */}
               {featuredPost && (
                 <div className="mb-12">
-                  <div className="inline-flex items-center gap-2 bg-(--color-cyan)/10 text-(--color-cyan) text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
+                  <div className="inline-flex items-center gap-2 bg-(--color-cyan)/10 text-(--color-cyan-ink) text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full mb-4">
                     Featured
                   </div>
                   <BlogCard post={featuredPost} />
                 </div>
               )}
 
-              {/* Newsletter */}
-              {regularPosts.length > 2 && (
-                <div className="my-12">
-                  <NewsletterCTA />
-                </div>
-              )}
-
-              {/* Post grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {regularPosts.map((post) => (
+                {otherPosts.map((post) => (
                   <BlogCard key={post.slug} post={post} />
                 ))}
+              </div>
+
+              <div className="mt-12">
+                <NewsletterCTA />
               </div>
             </>
           )}

@@ -37,7 +37,7 @@ export function MarkdownContent({ content }: { content: string }) {
             href={href}
             target={href?.startsWith("http") ? "_blank" : undefined}
             rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="text-(--color-cyan) underline underline-offset-4 hover:text-(--color-cyan-soft) transition-colors"
+            className="text-(--color-cyan-ink) underline underline-offset-4 hover:text-(--color-cyan-soft) transition-colors"
           >
             {children}
           </a>

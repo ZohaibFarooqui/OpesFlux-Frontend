@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import type { BlogPost } from "@/types/blog";
+import { formatDate } from "@/lib/utils";
 
 type BlogCardProps = {
   post: BlogPost;
@@ -40,7 +41,7 @@ export function BlogCard({ post }: BlogCardProps) {
             <div className="min-w-0">
               <div className="text-xs font-medium text-(--color-text-strong) truncate">{post.author?.name ?? "OpesFlux Team"}</div>
               <div className="text-xs text-(--color-muted)">
-                {new Date(post.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} · {post.readingTime} min read
+                {formatDate(post.date)} · {post.readingTime} min read
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ export type BlogAuthor = {
 export type BlogPost = {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   date: string;
   updated?: string;

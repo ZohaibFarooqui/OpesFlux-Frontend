@@ -28,6 +28,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     return {
       slug,
       title: data.title || "",
+      seoTitle: data.seoTitle,
       description: data.description || "",
       date: data.date || "",
       updated: data.updated,
@@ -55,6 +56,7 @@ export async function getPostBySlug(slug: string): Promise<(BlogPost & { content
   return {
     slug,
     title: data.title || "",
+    seoTitle: data.seoTitle,
     description: data.description || "",
     date: data.date || "",
     updated: data.updated,
