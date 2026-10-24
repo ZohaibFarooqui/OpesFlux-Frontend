@@ -1,353 +1,709 @@
-export type IndustryFeature = {
-  icon: string;
-  title: string;
-  desc: string;
-};
+import type { Faq } from "@/config/faq";
 
-export type IndustryStat = {
-  value: string;
-  label: string;
-};
+// Industry landing pages. Every feature named here is verified in the
+// OpesFlux application code or the verified product knowledge file.
+// Do not add features that are planned but not built.
+
+export type IndustryProblem = { problem: string; answer: string };
 
 export type Industry = {
-  name: string;
   slug: string;
-  icon: string;
-  shortDesc: string;
-  hero: {
-    eyebrow: string;
-    title: string;
-    description: string;
-  };
-  challenges: string[];
-  features: IndustryFeature[];
-  stats: IndustryStat[];
-  testimonial: {
-    quote: string;
-    author: string;
-  };
-  bulletPoints: string[];
+  name: string; // short label for menus and cards
+  navDesc: string;
+  icon: "Truck" | "Apple" | "Wine" | "Warehouse" | "Sparkles" | "Store" | "Coffee" | "ShoppingBag" | "Factory";
+  group: "wholesale" | "retail" | "production";
+  seo: { title: string; description: string };
+  hero: { eyebrow: string; h1: string; intro: string };
+  problemsTitle: string;
+  problems: IndustryProblem[];
+  features: string[];
+  notFor: string;
+  plan: string; // which plan usually fits, and why
+  faqs: Faq[];
+  related: { label: string; href: string }[];
+  updated: string; // ISO date of the last real content change (used for the sitemap)
 };
 
-export const INDUSTRIES: Record<string, Industry> = {
-  retail: {
-    name: "Retail",
-    slug: "retail",
-    icon: "Store",
-    shortDesc: "POS, stock, and loyalty for shops of any size",
-    hero: {
-      eyebrow: "For retailers worldwide",
-      title: "Run your shop in flow — from till to reports.",
-      description:
-        "Whether you run one corner shop or a chain of boutiques, OpesFlux brings your POS, stock, and accounting into one platform built for retail businesses everywhere.",
-    },
-    challenges: [
-      "Stock counts that never match the till",
-      "Returns and refunds that break your margins",
-      "Tax and reports buried in spreadsheets",
-      "No visibility across multiple locations",
-    ],
-    features: [
-      {
-        icon: "ScanLine",
-        title: "Lightning-fast POS",
-        desc: "Barcode scanning, split payments, gift cards, and offline mode. Your tills never stop.",
-      },
-      {
-        icon: "Package",
-        title: "Real-time inventory",
-        desc: "Live stock levels per shop. Auto-reorder when stock runs low. Inter-branch transfers in two clicks.",
-      },
-      {
-        icon: "Tag",
-        title: "Loyalty & promotions",
-        desc: "Built-in customer loyalty programme. Run flash sales and discounts across all locations.",
-      },
-      {
-        icon: "TrendingUp",
-        title: "Multi-location reports",
-        desc: "Compare branch performance, identify top sellers, and spot trends — all from one dashboard.",
-      },
-    ],
-    stats: [
-      { value: "47%", label: "of retailers globally cite inventory as their #1 operational pain" },
-      { value: "$1.8T", label: "in retail inventory distortion costs worldwide each year" },
-    ],
-    testimonial: {
-      quote: "Real testimonials coming soon from our retail customers worldwide.",
-      author: "Owner, Retail Business (Coming soon)",
-    },
-    bulletPoints: [
-      "Multi-location POS & stock sync",
-      "Tax compliance (jurisdiction configurable)",
-      "Loyalty & customer profiles",
-    ],
-  },
-  restaurants: {
-    name: "Restaurants",
-    slug: "restaurants",
-    icon: "Utensils",
-    shortDesc: "Table management, kitchen flow, and shift payroll",
-    hero: {
-      eyebrow: "For restaurants & hospitality worldwide",
-      title: "From first cover to last order — all in flow.",
-      description:
-        "OpesFlux keeps your front-of-house and back-of-house working together. Table management, kitchen display, payroll, and tax compliance — all under one roof.",
-    },
-    challenges: [
-      "Orders lost between floor and kitchen",
-      "Tips and split bills creating reconciliation headaches",
-      "Staff scheduling and payroll across shifts",
-      "No insight into table turn and peak times",
-    ],
-    features: [
-      {
-        icon: "ClipboardList",
-        title: "Table & order management",
-        desc: "Seat guests, take orders, and fire to kitchen — all from one screen. No double entry.",
-      },
-      {
-        icon: "Clock",
-        title: "Shift & staff management",
-        desc: "Rotas, time-clocking, and payroll for all your front-of-house and kitchen staff.",
-      },
-      {
-        icon: "BarChart3",
-        title: "Revenue & covers report",
-        desc: "See average spend, table turn time, and revenue per hour so you can optimise every service.",
-      },
-      {
-        icon: "Receipt",
-        title: "Tax & gratuity handling",
-        desc: "Service charge distribution and tax filings handled automatically, per your jurisdiction.",
-      },
-    ],
-    stats: [
-      { value: "30%", label: "of restaurant revenue is lost to inefficient operations globally" },
-      { value: "34%", label: "of hospitality businesses cite payroll errors as a top cost driver" },
-    ],
-    testimonial: {
-      quote: "Real testimonials coming soon from our restaurant customers worldwide.",
-      author: "Manager, Restaurant Group (Coming soon)",
-    },
-    bulletPoints: [
-      "Table & kitchen management",
-      "Gratuity & tax compliance",
-      "Shift-based payroll",
-    ],
-  },
-  wholesale: {
-    name: "Wholesale",
+export const INDUSTRIES_LIST: Industry[] = [
+  {
     slug: "wholesale",
+    name: "Wholesale & distribution",
+    navDesc: "Stock, purchase orders, invoicing and credit control",
     icon: "Truck",
-    shortDesc: "Purchase orders, pricing tiers, and logistics",
-    hero: {
-      eyebrow: "For wholesalers & distributors worldwide",
-      title: "Move more stock with less admin.",
+    group: "wholesale",
+    seo: {
+      title: "Stock Control Software for UK Wholesalers",
       description:
-        "From purchase orders to delivery notes, OpesFlux keeps your warehouse, accounting, and customer pricing in sync — so your operation scales without the chaos.",
+        "Stock control, purchase orders, sales orders, invoicing and credit control in one system for UK wholesalers and distributors. From £49 a month.",
     },
-    challenges: [
-      "Customer-specific pricing that's a spreadsheet nightmare",
-      "Stock that's committed but not yet invoiced",
-      "Purchase orders that don't match what arrived",
-      "Aged debtors that nobody is following up",
+    hero: {
+      eyebrow: "For wholesalers and distributors",
+      h1: "Stock control and order software for UK wholesalers",
+      intro:
+        "OpesFlux is cloud software for wholesalers and distributors that keeps stock, purchase orders, sales orders, invoices and customer accounts in one system. Every delivery in and every order out updates the same stock figure, so what the screen says is what is on the shelf.",
+    },
+    problemsTitle: "The problems wholesalers bring to us",
+    problems: [
+      {
+        problem: "Stock on the system never matches the warehouse",
+        answer:
+          "Goods received against a purchase order go straight into stock, and every sale, return and adjustment is recorded as a stock movement that can't be edited or deleted. Stock can never go below zero, so a count that doesn't match tells you something real.",
+      },
+      {
+        problem: "Orders and invoices are typed twice",
+        answer:
+          "Turn a quote into a sales order and the sales order into an invoice without re-keying. Delivery notes come from the same order, and the invoice posts to the accounts on its own.",
+      },
+      {
+        problem: "Customers pay late and nobody chases",
+        answer:
+          "Set a credit limit and payment terms per customer, see who owes what in aged receivables, and let OpesFlux send overdue reminder emails every morning. Customers can log in to a portal to see their invoices and statement.",
+      },
+      {
+        problem: "Buying is done on WhatsApp and in spreadsheets",
+        answer:
+          "Raise purchase orders, send them for approval, record what actually arrived on a goods received note, and pay suppliers from the same record. Low-stock alerts tell you what to reorder.",
+      },
     ],
     features: [
+      "Products with variants, barcodes and per-product VAT rates",
+      "Stock per warehouse or branch, with transfers between them",
+      "Purchase requests, purchase orders with approval, goods received notes",
+      "Quotes, sales orders, invoices, returns and credit notes",
+      "Delivery notes and shipping labels",
+      "Customer credit limits, payment terms and aged receivables",
+      "Daily overdue invoice reminder emails",
+      "Customer portal for invoices and statements",
+      "Card payments through Stripe",
+      "VAT return figures and double-entry accounts (Enterprise)",
+      "CSV import of products, customers and suppliers",
+    ],
+    notFor:
+      "OpesFlux doesn't track batch or serial numbers, bin locations or best-before dates, and it has no van-sales app. If you need any of those today, it isn't the right fit yet.",
+    plan: "Most wholesalers start on Growth (£49/month): it adds purchase orders, suppliers, several locations and returns. Choose Enterprise (£99/month) if you want the full double-entry accounts and bank feeds in the same system.",
+    faqs: [
       {
-        icon: "FileText",
-        title: "Purchase orders & GRNs",
-        desc: "Raise POs, receive against them, and match to supplier invoices automatically.",
+        q: "Can OpesFlux replace Sage or Xero for a wholesaler?",
+        a: "On the Enterprise plan OpesFlux includes double-entry accounts, bank reconciliation, open banking feeds and VAT return figures, so many wholesalers can run stock and accounts in one place. VAT returns are submitted through your accountant or MTD bridging software.",
       },
       {
-        icon: "Users",
-        title: "Customer price lists",
-        desc: "Set tiered pricing per customer or group. Trade portal for self-service ordering.",
+        q: "Can I run more than one warehouse?",
+        a: "Yes. Stock is held per location and you can transfer it between locations. Growth covers up to 5 locations; Enterprise is unlimited.",
       },
       {
-        icon: "Warehouse",
-        title: "Warehouse & bin locations",
-        desc: "Pick lists, bin locations, and batch tracking for perishable or serial-numbered goods.",
+        q: "Do my customers get a login?",
+        a: "Yes. The customer portal lets trade customers see their invoices and account statement.",
       },
       {
-        icon: "TrendingDown",
-        title: "Aged debtors & credit control",
-        desc: "Automated statements, credit limits, and overdue alerts keep your cash flow healthy.",
+        q: "How do I move my product list across?",
+        a: "Export it from your current system as a spreadsheet and import it as CSV. Customers and suppliers import the same way.",
       },
     ],
-    stats: [
-      { value: "62%", label: "of wholesalers globally still use manual or spreadsheet-based ordering" },
-      { value: "$950B", label: "in working capital tied up in wholesale supply chains worldwide" },
+    related: [
+      { label: "Food wholesale", href: "/industries/food-wholesale" },
+      { label: "Drinks wholesale", href: "/industries/drinks-wholesale" },
+      { label: "Cash and carry", href: "/industries/cash-and-carry" },
+      { label: "OpesFlux vs Unleashed", href: "/compare/unleashed" },
     ],
-    testimonial: {
-      quote: "Real testimonials coming soon from our wholesale customers worldwide.",
-      author: "Director, Distribution Company (Coming soon)",
-    },
-    bulletPoints: [
-      "Purchase orders & supplier management",
-      "Customer price tiers",
-      "Aged debtors & credit control",
-    ],
+    updated: "2026-10-24",
   },
-  construction: {
-    name: "Construction",
-    slug: "construction",
-    icon: "HardHat",
-    shortDesc: "Job costing, subcontractors, and compliance",
-    hero: {
-      eyebrow: "For construction businesses worldwide",
-      title: "Build projects, not admin headaches.",
+  {
+    slug: "food-wholesale",
+    name: "Food wholesale",
+    navDesc: "Fast-moving stock, standing orders and trade accounts",
+    icon: "Apple",
+    group: "wholesale",
+    seo: {
+      title: "Food Wholesale Software for UK Distributors",
       description:
-        "OpesFlux handles your subcontractor payments, job costing, and site purchases — so you can focus on the work, not the paperwork.",
+        "Software for UK food wholesalers and distributors: stock control, purchase orders, sales orders, delivery notes, invoicing and credit control.",
     },
-    challenges: [
-      "Compliance deductions calculated incorrectly or missed",
-      "Job costs that run over budget without anyone noticing",
-      "Subcontractors chasing invoices you can't reconcile",
-      "Materials purchases scattered across cards and accounts",
+    hero: {
+      eyebrow: "For food wholesalers and distributors",
+      h1: "Software for food wholesalers that keeps stock and invoices straight",
+      intro:
+        "Food distribution runs on thin margins and fast-moving stock. OpesFlux puts purchasing, stock, orders, delivery notes and invoices in one system, so you know what you have, what is on order and who owes you, without three spreadsheets.",
+    },
+    problemsTitle: "Day-to-day problems in food distribution",
+    problems: [
+      {
+        problem: "Running out of fast sellers, over-ordering slow ones",
+        answer:
+          "Live stock per location and low-stock alerts show what needs reordering before the shelf is empty. Purchase orders record what you ordered and goods received notes record what turned up.",
+      },
+      {
+        problem: "The same customers order the same things every week",
+        answer:
+          "Set up recurring invoices for regular customers, or copy a quote into a new sales order rather than starting from blank.",
+      },
+      {
+        problem: "Mixed VAT rates on one invoice",
+        answer:
+          "Each product carries its own VAT rate, so zero-rated food and standard-rated items sit on one invoice with the VAT worked out correctly per line. Your VAT return figures build up from those invoices.",
+      },
+      {
+        problem: "Restaurants and shops paying 60 days late",
+        answer:
+          "Credit limits, payment terms, aged receivables and automatic overdue reminder emails help you chase without it eating your morning.",
+      },
     ],
     features: [
+      "Per-product VAT rates, including zero-rated food",
+      "Stock per depot, with transfers between depots",
+      "Purchase orders and goods received notes",
+      "Sales orders, delivery notes and invoices",
+      "Recurring invoices for standing orders",
+      "Credit limits, payment terms and overdue reminders",
+      "Returns and credit notes for damaged or short deliveries",
+      "Customer portal with invoices and statements",
+    ],
+    notFor:
+      "OpesFlux doesn't track batches, lot numbers or best-before dates. If you need full lot traceability for food safety audits, you'll need a system that does that.",
+    plan: "Growth (£49/month) covers purchasing, several depots and returns. Enterprise (£99/month) adds the full accounts and bank feeds.",
+    faqs: [
       {
-        icon: "HardHat",
-        title: "Compliance & deductions",
-        desc: "Calculate statutory deductions for subcontractors automatically, per your local rules.",
+        q: "Does OpesFlux handle zero-rated and standard-rated food on the same invoice?",
+        a: "Yes. VAT is set per product, so each invoice line uses the right rate and the totals and VAT return figures follow from that.",
       },
       {
-        icon: "Calculator",
-        title: "Job costing",
-        desc: "Assign every purchase, timesheet, and invoice to a job. See profit per project in real time.",
+        q: "Can I see stock across more than one depot?",
+        a: "Yes. Stock is held per location, with transfers between them and one view across all of them.",
       },
       {
-        icon: "Users",
-        title: "Subcontractor management",
-        desc: "Track all subs, their verification status, payment history, and outstanding amounts.",
-      },
-      {
-        icon: "FileCheck",
-        title: "Site purchase orders",
-        desc: "Authorise and track material orders per site. Match deliveries and invoices automatically.",
+        q: "Does it track best-before dates?",
+        a: "No. OpesFlux doesn't track batches, lots or expiry dates today.",
       },
     ],
-    stats: [
-      { value: "58%", label: "of construction firms globally report job cost overruns every year" },
-      { value: "92%", label: "of construction businesses still manage compliance manually" },
+    related: [
+      { label: "Wholesale & distribution", href: "/industries/wholesale" },
+      { label: "Cash and carry", href: "/industries/cash-and-carry" },
+      { label: "Drinks wholesale", href: "/industries/drinks-wholesale" },
+      { label: "OpesFlux vs Xero and spreadsheets", href: "/compare/xero-and-spreadsheets" },
     ],
-    testimonial: {
-      quote: "Real testimonials coming soon from our construction customers worldwide.",
-      author: "Owner, Construction Company (Coming soon)",
-    },
-    bulletPoints: [
-      "Statutory compliance & deductions",
-      "Job costing & project P&L",
-      "Site purchase orders",
-    ],
+    updated: "2026-10-24",
   },
-  manufacturing: {
-    name: "Manufacturing",
+  {
+    slug: "drinks-wholesale",
+    name: "Drinks wholesale",
+    navDesc: "Cases, singles, purchase orders and trade customers",
+    icon: "Wine",
+    group: "wholesale",
+    seo: {
+      title: "Drinks Wholesale Software for UK Distributors",
+      description:
+        "Stock control, purchase orders, sales orders and invoicing for UK drinks wholesalers and distributors supplying pubs, bars, shops and off-licences.",
+    },
+    hero: {
+      eyebrow: "For drinks wholesalers and distributors",
+      h1: "Stock and order software for drinks wholesalers",
+      intro:
+        "Whether you supply pubs, restaurants, off-licences or shops, OpesFlux keeps your stock, supplier orders, customer orders and invoices in one place, and shows you which accounts are overdue.",
+    },
+    problemsTitle: "What slows drinks distributors down",
+    problems: [
+      {
+        problem: "Selling by the case and by the bottle",
+        answer:
+          "Product variants let you keep pack sizes of the same line under one product, each with its own barcode and price.",
+      },
+      {
+        problem: "Stock spread across a warehouse and vans or branches",
+        answer:
+          "Hold stock per location and move it with stock transfers, so each location's figure stays accurate.",
+      },
+      {
+        problem: "Trade accounts that drift past terms",
+        answer:
+          "Credit limits and payment terms per customer, aged receivables, and daily overdue reminder emails keep cash coming in.",
+      },
+      {
+        problem: "Online and trade orders in separate systems",
+        answer:
+          "If you also sell through Shopify or WooCommerce, online orders come into OpesFlux and stock levels are pushed back, so you sell from one stock figure.",
+      },
+    ],
+    features: [
+      "Products with variants for pack sizes",
+      "Barcode scanning",
+      "Stock per location and transfers",
+      "Purchase orders with approval and goods received",
+      "Sales orders, delivery notes and invoices",
+      "Credit control: limits, terms, aged receivables, reminders",
+      "Shopify and WooCommerce order and stock sync",
+      "Point of sale for a trade counter",
+    ],
+    notFor:
+      "OpesFlux doesn't calculate alcohol duty or handle bonded warehouse stock, and it doesn't track batch numbers. Duty-suspended operations need a specialist system.",
+    plan: "Growth (£49/month) is the usual fit. Enterprise (£99/month) if you want accounts and bank feeds in the same system.",
+    faqs: [
+      {
+        q: "Does OpesFlux calculate alcohol duty?",
+        a: "No. It handles VAT per product but not alcohol duty or bonded stock.",
+      },
+      {
+        q: "Can I sell cases and singles of the same product?",
+        a: "Yes. Use product variants for each pack size, each with its own barcode and price.",
+      },
+      {
+        q: "Can I also run a trade counter?",
+        a: "Yes. The point of sale runs in the browser, scans barcodes and keeps selling if the internet drops.",
+      },
+    ],
+    related: [
+      { label: "Off-licences", href: "/industries/off-licences" },
+      { label: "Cash and carry", href: "/industries/cash-and-carry" },
+      { label: "Wholesale & distribution", href: "/industries/wholesale" },
+      { label: "OpesFlux vs Brightpearl", href: "/compare/brightpearl" },
+    ],
+    updated: "2026-10-24",
+  },
+  {
+    slug: "cash-and-carry",
+    name: "Cash and carry",
+    navDesc: "Trade counter tills, stock and customer accounts",
+    icon: "Warehouse",
+    group: "wholesale",
+    seo: {
+      title: "Cash and Carry EPOS and Stock Software (UK)",
+      description:
+        "Cash and carry EPOS with stock control, purchase orders, trade customer accounts and invoicing in one system. Tills keep selling offline. From £19 a month.",
+    },
+    hero: {
+      eyebrow: "For cash and carry businesses",
+      h1: "Cash and carry EPOS with stock control built in",
+      intro:
+        "A cash and carry is a shop and a wholesaler at the same time. OpesFlux gives you tills at the counter and a full back office behind them: stock, supplier orders, trade customer accounts and invoices, all working from the same numbers.",
+    },
+    problemsTitle: "What cash and carry owners tell us",
+    problems: [
+      {
+        problem: "The till and the stock system disagree",
+        answer:
+          "Every sale at the till takes stock off straight away, so there's nothing to export or reconcile at night.",
+      },
+      {
+        problem: "Queues build when the internet goes down",
+        answer:
+          "The point of sale keeps taking sales offline and syncs them when the connection returns.",
+      },
+      {
+        problem: "Trade customers want an invoice, not a receipt",
+        answer:
+          "Attach a customer to a sale, or raise a full VAT invoice from a sales order. Customer accounts carry credit limits and payment terms.",
+      },
+      {
+        problem: "Reordering is guesswork",
+        answer:
+          "Low-stock alerts flag lines to reorder, and purchase orders with goods received notes show exactly what came in.",
+      },
+    ],
+    features: [
+      "Browser-based tills with barcode scanning and receipts",
+      "Offline selling with automatic sync",
+      "Cash, card and bank transfer payments",
+      "Discounts at the till",
+      "Stock per site with low-stock alerts",
+      "Purchase orders and goods received notes",
+      "Trade customer accounts, invoices and credit control",
+      "Sales and stock reports per site",
+    ],
+    notFor:
+      "OpesFlux doesn't run loyalty schemes or gift cards at the till, and it doesn't track batches. If those are essential, it isn't the right fit yet.",
+    plan: "One site can start on Starter (£19/month). Most cash and carries choose Growth (£49/month) for purchase orders, suppliers and returns.",
+    faqs: [
+      {
+        q: "Will the tills work if the broadband fails?",
+        a: "Yes. Sales are stored on the device and sync automatically when the connection is back.",
+      },
+      {
+        q: "Do I need special till hardware?",
+        a: "OpesFlux runs in a web browser, so it works on a standard PC, laptop or tablet with a barcode scanner.",
+      },
+      {
+        q: "Can trade customers buy on account?",
+        a: "You can attach a customer to a sale and invoice them, with credit limits and payment terms on their account.",
+      },
+    ],
+    related: [
+      { label: "Food wholesale", href: "/industries/food-wholesale" },
+      { label: "Off-licences", href: "/industries/off-licences" },
+      { label: "Wholesale & distribution", href: "/industries/wholesale" },
+      { label: "OpesFlux vs Sage 50", href: "/compare/sage-50" },
+    ],
+    updated: "2026-10-24",
+  },
+  {
+    slug: "cosmetics-household-wholesale",
+    name: "Cosmetics & household",
+    navDesc: "Variants, barcodes, online channels and trade orders",
+    icon: "Sparkles",
+    group: "wholesale",
+    seo: {
+      title: "Cosmetics and Household Goods Wholesale Software",
+      description:
+        "Inventory and order software for UK cosmetics and household wholesalers: variants, barcodes, Shopify and WooCommerce sync, purchase orders, invoicing.",
+    },
+    hero: {
+      eyebrow: "For cosmetics and household goods wholesalers",
+      h1: "Inventory software for cosmetics and household wholesalers",
+      intro:
+        "Shades, sizes and scents turn one product into dozens of lines. OpesFlux handles variants and barcodes, keeps trade and online stock in step, and runs your purchase orders and invoices from the same system.",
+    },
+    problemsTitle: "Common problems in cosmetics and household wholesale",
+    problems: [
+      {
+        problem: "Hundreds of variants to keep track of",
+        answer:
+          "Product variants keep every shade, size or scent under one product, each with its own barcode and stock level.",
+      },
+      {
+        problem: "Selling online and to trade from the same stock",
+        answer:
+          "Shopify and WooCommerce orders come into OpesFlux and stock levels are pushed back to your shop, so you don't oversell.",
+      },
+      {
+        problem: "Returns and damaged goods",
+        answer:
+          "Record returns against the original sale and issue credit notes. The stock and the accounts both update.",
+      },
+      {
+        problem: "Importing from overseas suppliers",
+        answer:
+          "Purchase orders, goods received notes and supplier payments in one record, with multi-currency transactions on the Enterprise plan.",
+      },
+    ],
+    features: [
+      "Product variants with their own barcodes and stock",
+      "Shopify and WooCommerce order and stock sync",
+      "Purchase orders and goods received notes",
+      "Multi-currency transactions (Enterprise)",
+      "Sales orders, invoices, returns and credit notes",
+      "Stock per location and transfers",
+      "Credit control for trade customers",
+      "CSV import for large product catalogues",
+    ],
+    notFor:
+      "OpesFlux doesn't track batch numbers or expiry dates, which some cosmetics businesses need for product recalls.",
+    plan: "Growth (£49/month) for purchasing and several locations. Enterprise (£99/month) if you import in other currencies.",
+    faqs: [
+      {
+        q: "Can I import a large catalogue with variants?",
+        a: "Yes. Products import from CSV, so you can bring your catalogue across from a spreadsheet.",
+      },
+      {
+        q: "Does it work with Shopify?",
+        a: "Yes. Orders come in from Shopify and stock levels are pushed back. WooCommerce works the same way.",
+      },
+      {
+        q: "Can I buy from suppliers in euros or dollars?",
+        a: "Yes, on the Enterprise plan, which includes multi-currency transactions.",
+      },
+    ],
+    related: [
+      { label: "Wholesale & distribution", href: "/industries/wholesale" },
+      { label: "Multi-site retail", href: "/industries/retail" },
+      { label: "OpesFlux vs Brightpearl", href: "/compare/brightpearl" },
+      { label: "OpesFlux vs Unleashed", href: "/compare/unleashed" },
+    ],
+    updated: "2026-10-24",
+  },
+  {
+    slug: "off-licences",
+    name: "Off-licences",
+    navDesc: "EPOS, stock per shop and supplier orders",
+    icon: "ShoppingBag",
+    group: "retail",
+    seo: {
+      title: "EPOS System for Off-Licences with Stock Control",
+      description:
+        "EPOS for UK off-licences and convenience stores: offline barcode tills, stock per shop, low-stock alerts, supplier orders and rotas. From £19 a month.",
+    },
+    hero: {
+      eyebrow: "For off-licences and convenience stores",
+      h1: "EPOS for off-licences, with stock control that matches the till",
+      intro:
+        "OpesFlux gives an off-licence a barcode till that keeps selling offline, live stock for every shop, supplier orders and staff rotas, in one system you open in a web browser.",
+    },
+    problemsTitle: "Problems off-licence owners know too well",
+    problems: [
+      {
+        problem: "The stock count never matches what was sold",
+        answer:
+          "Each sale takes stock off immediately, and every adjustment is kept in a movement history that can't be changed, so you can see where the difference came from.",
+      },
+      {
+        problem: "Running out of best sellers on a Friday",
+        answer:
+          "Low-stock alerts show what to reorder, and purchase orders record what you've ordered from each supplier.",
+      },
+      {
+        problem: "Two or three shops, no single view",
+        answer:
+          "Stock is held per shop, you can move it between shops, and sales reports show each shop side by side.",
+      },
+      {
+        problem: "Staff hours on paper",
+        answer:
+          "Build rotas, record attendance and leave, and run payroll with PAYE, National Insurance and pensions in the same system.",
+      },
+    ],
+    features: [
+      "Barcode tills in the browser, with receipts",
+      "Offline selling with automatic sync",
+      "Per-product VAT rates",
+      "Stock per shop, transfers and low-stock alerts",
+      "Purchase orders and supplier records",
+      "Sales and stock reports per shop",
+      "Rotas, attendance, leave and payroll",
+      "Roles so staff only see what they need",
+    ],
+    notFor:
+      "OpesFlux doesn't have loyalty schemes, gift cards or age-verification prompts at the till.",
+    plan: "One shop: Starter (£19/month). Two to five shops, or if you want payroll and rotas: Growth (£49/month).",
+    faqs: [
+      {
+        q: "What hardware do I need?",
+        a: "Any PC, laptop or tablet with a web browser, plus a barcode scanner and receipt printer if you use them.",
+      },
+      {
+        q: "Can I see all my shops in one place?",
+        a: "Yes. Stock and sales are kept per shop, with reports across all of them.",
+      },
+      {
+        q: "Does it do staff rotas?",
+        a: "Yes, on Growth: rotas, shifts, attendance, leave and payroll.",
+      },
+    ],
+    related: [
+      { label: "Multi-site retail", href: "/industries/retail" },
+      { label: "Drinks wholesale", href: "/industries/drinks-wholesale" },
+      { label: "Cash and carry", href: "/industries/cash-and-carry" },
+      { label: "Pricing", href: "/pricing" },
+    ],
+    updated: "2026-10-24",
+  },
+  {
+    slug: "multi-site-cafes",
+    name: "Multi-site cafés",
+    navDesc: "Tills, rotas, attendance and payroll across sites",
+    icon: "Coffee",
+    group: "retail",
+    seo: {
+      title: "EPOS, Rotas and Payroll for Multi-Site Cafés",
+      description:
+        "For café groups with two or more sites: browser tills that work offline, stock per site, staff rotas, attendance, leave and UK payroll in one system.",
+    },
+    hero: {
+      eyebrow: "For café and coffee shop groups",
+      h1: "Tills, rotas and payroll for café groups, in one system",
+      intro:
+        "Once you have more than one café, the hard part is the staff: rotas, hours, holidays and payroll across every site. OpesFlux puts those next to your tills and stock, so sales, hours and wages sit in one place.",
+    },
+    problemsTitle: "What café groups struggle with",
+    problems: [
+      {
+        problem: "Rotas in a spreadsheet, hours on paper",
+        answer:
+          "Build shifts and rotas per site. Staff clock in on the employee app, with a face check and an optional location fence around the café.",
+      },
+      {
+        problem: "Payroll that takes a day every month",
+        answer:
+          "Payroll runs from the hours and leave already in the system, calculating PAYE, National Insurance and auto-enrolment pensions, and produces payslips.",
+      },
+      {
+        problem: "No idea which site is actually profitable",
+        answer:
+          "Sales and stock are kept per site, so you can compare sites side by side.",
+      },
+      {
+        problem: "Stock and supplies ordered ad hoc",
+        answer:
+          "Purchase orders and stock per site, with low-stock alerts, keep each café supplied.",
+      },
+    ],
+    features: [
+      "Browser tills that work offline",
+      "Stock per site and transfers",
+      "Shifts and rotas per site",
+      "Attendance via the employee app, with face check and geofence",
+      "Leave requests and accruals",
+      "UK payroll: PAYE, NI, auto-enrolment pensions, payslips",
+      "Purchase orders and suppliers",
+      "Sales reports per site",
+    ],
+    notFor:
+      "OpesFlux has no table plans, kitchen screens or tip distribution. If you need full table service at a single restaurant, a hospitality EPOS will suit you better.",
+    plan: "Growth (£49/month) covers up to 5 sites with rotas and payroll. Enterprise (£99/month) for more sites or several companies.",
+    faqs: [
+      {
+        q: "Does OpesFlux have table service or kitchen screens?",
+        a: "No. It suits counter-service cafés and groups whose main need is staff, stock and payroll across sites.",
+      },
+      {
+        q: "Does it send RTI to HMRC?",
+        a: "No. It calculates pay, PAYE, NI and pensions and produces payslips. RTI submissions are sent by you or your payroll bureau.",
+      },
+      {
+        q: "How do staff clock in?",
+        a: "Through the employee app, which can check their face and whether they are at the café.",
+      },
+    ],
+    related: [
+      { label: "Multi-site retail", href: "/industries/retail" },
+      { label: "Off-licences", href: "/industries/off-licences" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Features", href: "/features" },
+    ],
+    updated: "2026-10-24",
+  },
+  {
+    slug: "retail",
+    name: "Multi-site retail",
+    navDesc: "Tills, stock per shop and transfers between shops",
+    icon: "Store",
+    group: "retail",
+    seo: {
+      title: "EPOS and Stock Control for Multi-Site Shops (UK)",
+      description:
+        "For UK retailers with 2-10 shops: browser EPOS that works offline, stock per shop, transfers, purchase orders, Shopify sync and payroll in one system.",
+    },
+    hero: {
+      eyebrow: "For independent retailers with more than one shop",
+      h1: "EPOS and stock control for shops with more than one site",
+      intro:
+        "Opening a second or third shop is when a basic till stops coping. OpesFlux keeps stock per shop, moves it between shops, and puts purchasing, staff and the accounts in the same system as your tills.",
+    },
+    problemsTitle: "What changes when you open a second shop",
+    problems: [
+      {
+        problem: "One shop has it, the other has sold out",
+        answer:
+          "Stock is held per shop, so you can see where it is and move it with a stock transfer.",
+      },
+      {
+        problem: "Online sales and shop sales fight over the same stock",
+        answer:
+          "Shopify and WooCommerce orders come into OpesFlux and stock levels are pushed back, so the website sells from the same figure as the till.",
+      },
+      {
+        problem: "You can't compare your shops",
+        answer:
+          "Sales and stock reports per shop, and live dashboards across all of them.",
+      },
+      {
+        problem: "More staff, more payroll",
+        answer:
+          "Rotas, attendance, leave and UK payroll sit in the same system as sales.",
+      },
+    ],
+    features: [
+      "Browser EPOS with barcode scanning and receipts",
+      "Offline selling with automatic sync",
+      "Products, variants and per-product VAT",
+      "Stock per shop, transfers and low-stock alerts",
+      "Purchase orders and goods received notes",
+      "Returns and credit notes",
+      "Shopify and WooCommerce sync",
+      "Rotas, attendance, leave and payroll",
+    ],
+    notFor:
+      "OpesFlux doesn't have loyalty points or gift cards, and the till takes one payment method per sale.",
+    plan: "Growth (£49/month) covers up to 5 shops. Enterprise (£99/month) for unlimited shops, several companies or full accounts.",
+    faqs: [
+      {
+        q: "How many shops can I run?",
+        a: "Starter covers 1 location, Growth up to 5 and Enterprise unlimited.",
+      },
+      {
+        q: "Can I move stock between shops?",
+        a: "Yes, with stock transfers. Both shops' stock updates when the transfer is made.",
+      },
+      {
+        q: "Does it work with my online shop?",
+        a: "Yes, with Shopify and WooCommerce.",
+      },
+    ],
+    related: [
+      { label: "Off-licences", href: "/industries/off-licences" },
+      { label: "Multi-site cafés", href: "/industries/multi-site-cafes" },
+      { label: "Cosmetics & household", href: "/industries/cosmetics-household-wholesale" },
+      { label: "OpesFlux vs Xero and spreadsheets", href: "/compare/xero-and-spreadsheets" },
+    ],
+    updated: "2026-10-24",
+  },
+  {
     slug: "manufacturing",
+    name: "Small manufacturers",
+    navDesc: "Bills of materials, production planning and work orders",
     icon: "Factory",
-    shortDesc: "Production runs, BOMs, and supply chain control",
-    hero: {
-      eyebrow: "For manufacturers worldwide",
-      title: "From raw material to finished goods — in flow.",
+    group: "production",
+    seo: {
+      title: "Manufacturing Software for Small UK Producers",
       description:
-        "OpesFlux connects your production floor to your back office. Bills of materials, production runs, supplier management, and cost tracking in one unified platform.",
+        "Bills of materials, production planning (MPS/MRP), work orders and stock in one system for small manufacturers that also sell and invoice.",
     },
-    challenges: [
-      "Production schedules disconnected from inventory",
-      "Raw material shortages causing costly downtime",
-      "No visibility of actual vs standard cost per product",
-      "Quality holds and batch issues going untracked",
+    hero: {
+      eyebrow: "For small manufacturers and producers",
+      h1: "Production planning and stock for small manufacturers",
+      intro:
+        "If you make what you sell, OpesFlux connects bills of materials, production planning and work orders to your stock, purchasing and invoicing, so materials, finished goods and sales all live in one system.",
+    },
+    problemsTitle: "Where small producers lose time",
+    problems: [
+      {
+        problem: "Recipes and bills of materials in spreadsheets",
+        answer:
+          "Build multi-level bills of materials, so sub-assemblies and their components roll up into the finished product.",
+      },
+      {
+        problem: "Running short of materials mid-run",
+        answer:
+          "The master production schedule and material requirements planning (MRP) work out what materials a plan needs against what you have.",
+      },
+      {
+        problem: "Not knowing what a batch really cost",
+        answer:
+          "Work orders record materials and labour, so you can compare actual cost with standard cost.",
+      },
+      {
+        problem: "Production separate from sales and invoicing",
+        answer:
+          "Finished goods go into the same stock that your sales orders and invoices draw from.",
+      },
     ],
     features: [
+      "Multi-level bills of materials",
+      "Master production schedule (MPS)",
+      "Material requirements planning (MRP)",
+      "Work orders with materials and labour",
+      "Actual vs standard cost",
+      "Purchase orders for materials",
+      "Sales orders, invoices and stock",
+      "Accounts and payroll in the same system",
+    ],
+    notFor:
+      "OpesFlux doesn't track batch or lot numbers through production, and isn't built for shop-floor machine scheduling.",
+    plan: "Talk to us: manufacturing is set up per company, and most producers also need purchasing and accounts.",
+    faqs: [
       {
-        icon: "Factory",
-        title: "Bills of materials (BOM)",
-        desc: "Define multi-level BOMs for every product. Manage variants, sub-assemblies, and by-products.",
+        q: "Does OpesFlux support multi-level bills of materials?",
+        a: "Yes. Bills of materials can contain sub-assemblies with their own components.",
       },
       {
-        icon: "Layers",
-        title: "Production run management",
-        desc: "Schedule runs, issue materials, record labour, and complete works orders with full traceability.",
-      },
-      {
-        icon: "Package",
-        title: "Raw material inventory",
-        desc: "Live stock of raw materials, WIP, and finished goods. Auto-trigger purchase orders on shortage.",
-      },
-      {
-        icon: "TrendingUp",
-        title: "Cost analysis",
-        desc: "Compare actual vs standard cost per production run. Identify waste and margin leakage instantly.",
+        q: "Can it plan what materials I need?",
+        a: "Yes. The master production schedule and MRP work out material requirements from your production plan.",
       },
     ],
-    stats: [
-      { value: "23%", label: "of manufacturing cost is wasted on unplanned downtime and rework globally" },
-      { value: "68%", label: "of manufacturers cite poor inventory visibility as their biggest pain point" },
+    related: [
+      { label: "Wholesale & distribution", href: "/industries/wholesale" },
+      { label: "Features", href: "/features" },
+      { label: "Pricing", href: "/pricing" },
     ],
-    testimonial: {
-      quote: "Real testimonials coming soon from our manufacturing customers worldwide.",
-      author: "Operations Manager, Manufacturing Company (Coming soon)",
-    },
-    bulletPoints: [
-      "Bills of materials & production runs",
-      "Raw material & WIP inventory",
-      "Cost variance & waste analysis",
-    ],
+    updated: "2026-10-24",
   },
-  "professional-services": {
-    name: "Professional Services",
-    slug: "professional-services",
-    icon: "Briefcase",
-    shortDesc: "Time tracking, retainers, and project billing",
-    hero: {
-      eyebrow: "For professional services firms worldwide",
-      title: "Bill every hour. Miss no deadline.",
-      description:
-        "From consultancies to law firms, OpesFlux tracks time, generates invoices, manages your team, and handles compliance — all in one platform.",
-    },
-    challenges: [
-      "Time logged in spreadsheets that never becomes an invoice",
-      "Contractor compliance creating uncertainty",
-      "WIP that's hard to value at month end",
-      "No visibility of utilisation and recovery rates",
-    ],
-    features: [
-      {
-        icon: "Clock",
-        title: "Time tracking & billing",
-        desc: "Log time against clients and projects. Auto-generate invoices at billing milestones.",
-      },
-      {
-        icon: "FileText",
-        title: "Contractor compliance",
-        desc: "Manage contractor classifications and compliance documentation per your local regulations.",
-      },
-      {
-        icon: "PieChart",
-        title: "Utilisation & WIP reports",
-        desc: "See team utilisation, WIP value, and recovery rates updated daily.",
-      },
-      {
-        icon: "CreditCard",
-        title: "Retainer management",
-        desc: "Manage monthly retainer clients, track hours used, and roll over unused time.",
-      },
-    ],
-    stats: [
-      { value: "30%", label: "of billable time goes uncaptured in professional services firms globally" },
-      { value: "71%", label: "of consultancies globally fail to track time accurately against projects" },
-    ],
-    testimonial: {
-      quote: "Real testimonials coming soon from our professional services customers worldwide.",
-      author: "Director, Consultancy (Coming soon)",
-    },
-    bulletPoints: [
-      "Time tracking & milestone billing",
-      "Contractor compliance tools",
-      "WIP & utilisation reports",
-    ],
-  },
-};
+];
 
-export const INDUSTRIES_LIST = Object.values(INDUSTRIES);
+export const INDUSTRIES: Record<string, Industry> = Object.fromEntries(
+  INDUSTRIES_LIST.map((i) => [i.slug, i])
+);
