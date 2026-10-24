@@ -21,6 +21,10 @@ export default config({
         title: fields.slug({
           name: { label: "Title", description: "The main heading of the post (also becomes the URL slug)" },
         }),
+        seoTitle: fields.text({
+          label: "SEO Title (optional)",
+          description: "Shorter title for Google, under 50 characters. Leave blank to use the main title.",
+        }),
         description: fields.text({
           label: "Meta Description",
           description: "Short summary shown in search results and the blog listing (150–160 chars)",
@@ -74,7 +78,7 @@ export default config({
         author: fields.object(
           {
             name: fields.text({ label: "Author Name" }),
-            role: fields.text({ label: "Author Role", description: "e.g. CEO & Co-founder" }),
+            role: fields.text({ label: "Author Role", description: "A real person or \"Devs and Visuals\". Never an invented name." }),
             avatar: fields.text({
               label: "Avatar Path",
               description: "Path relative to /public (e.g. /team/james.jpg)",
