@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-6">
       <div className="text-center max-w-xl">
-        <div className="text-8xl font-bold text-(--color-cyan) mb-4 tracking-tighter">404</div>
+        <div className="text-8xl font-bold text-(--color-cyan-ink) mb-4 tracking-tighter">404</div>
         <h1 className="text-3xl font-semibold text-(--color-deep-blue) mb-3">This page took a wrong turn</h1>
         <p className="text-lg text-(--color-muted) mb-10">Let&apos;s get you back to flow.</p>
         <div className="flex flex-wrap justify-center gap-4 mb-12">

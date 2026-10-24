@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { siteConfig } from "@/config/site";
+import { pageMetadata } from "@/lib/seo";
 import { Mail, Phone, MapPin, Copy } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Book a Demo — Contact OpesFlux",
+export const metadata = pageMetadata({
+  title: "Book a Free Demo",
   description:
-    "Book a free 20-minute demo of OpesFlux. We'll show you exactly what it looks like for your industry — no pressure, no commitment.",
-  alternates: { canonical: "https://opesflux.devsandvisuals.com/contact" },
-};
+    "Book a free 20-minute OpesFlux demo, run by the team that builds it. See the till, stock, purchasing and accounts for a business like yours.",
+  path: "/contact",
+});
 
 export default async function ContactPage({
   searchParams,
@@ -23,7 +23,7 @@ export default async function ContactPage({
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left — form */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan) mb-3">Let&apos;s talk</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan-ink) mb-3">Let&apos;s talk</p>
             <h1 className="text-4xl font-semibold text-(--color-deep-blue) leading-tight tracking-tight mb-3">
               Book a free demo
             </h1>
@@ -41,7 +41,7 @@ export default async function ContactPage({
               <div className="space-y-5">
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-xl bg-(--color-cyan)/10 flex items-center justify-center shrink-0">
-                    <Mail className="h-4 w-4 text-(--color-cyan)" />
+                    <Mail className="h-4 w-4 text-(--color-cyan-ink)" />
                   </div>
                   <div>
                     <div className="text-xs text-(--color-muted) mb-0.5">Email</div>
@@ -53,7 +53,7 @@ export default async function ContactPage({
 
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-xl bg-(--color-cyan)/10 flex items-center justify-center shrink-0">
-                    <Phone className="h-4 w-4 text-(--color-cyan)" />
+                    <Phone className="h-4 w-4 text-(--color-cyan-ink)" />
                   </div>
                   <div>
                     <div className="text-xs text-(--color-muted) mb-0.5">Phone / WhatsApp</div>
@@ -65,7 +65,7 @@ export default async function ContactPage({
 
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-xl bg-(--color-cyan)/10 flex items-center justify-center shrink-0">
-                    <MapPin className="h-4 w-4 text-(--color-cyan)" />
+                    <MapPin className="h-4 w-4 text-(--color-cyan-ink)" />
                   </div>
                   <div>
                     <div className="text-xs text-(--color-muted) mb-0.5">Address</div>
@@ -80,7 +80,7 @@ export default async function ContactPage({
                   href={siteConfig.calendly}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-(--color-cyan) hover:underline underline-offset-4"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-(--color-cyan-ink) hover:underline underline-offset-4"
                 >
                   Open Calendly →
                 </a>

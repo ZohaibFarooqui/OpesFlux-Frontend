@@ -89,7 +89,7 @@ export function ContactForm({ plan }: { plan?: string }) {
             href={process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/opesflux/demo"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-2 text-(--color-cyan) font-medium hover:underline"
+            className="inline-block mt-2 text-(--color-cyan-ink) font-medium hover:underline"
           >
             Open Calendly →
           </a>
@@ -234,7 +234,7 @@ export function ContactForm({ plan }: { plan?: string }) {
         />
         <label htmlFor="consent" className="text-sm text-(--color-text) leading-relaxed cursor-pointer">
           I consent to OpesFlux contacting me about my enquiry and storing my details in accordance with the{" "}
-          <Link href="/privacy" className="text-(--color-cyan) hover:underline">Privacy Policy</Link>.{" "}
+          <Link href="/privacy" className="text-(--color-cyan-ink) underline underline-offset-2">Privacy Policy</Link>.{" "}
           <span className="text-(--color-error)">*</span>
         </label>
       </div>
