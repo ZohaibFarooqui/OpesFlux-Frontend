@@ -32,7 +32,7 @@ export function PricingCards() {
           />
         </button>
         <span className={cn("text-sm font-medium", annual ? "text-(--color-deep-blue)" : "text-(--color-muted)")}>
-          Annual <span className="text-(--color-cyan) font-semibold">(save 20%)</span>
+          Annual <span className="text-(--color-cyan-ink) font-semibold">(save 20%)</span>
         </span>
       </div>
 
@@ -58,7 +58,7 @@ export function PricingCards() {
             )}
 
             <div className="mb-6">
-              <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan) mb-2">{tier.name}</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan-ink) mb-2">{tier.name}</p>
               <div className="flex items-end gap-1 mb-1">
                 <span className="text-5xl font-bold text-(--color-deep-blue)">
                   {tier.currencySymbol}{annual ? Math.round(tier.price.annual / 12) : tier.price.monthly}
@@ -87,7 +87,7 @@ export function PricingCards() {
               <ul className="space-y-3">
                 {tier.features.map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-(--color-text)">
-                    <Check className="h-4 w-4 text-(--color-cyan) shrink-0 mt-0.5" />
+                    <Check className="h-4 w-4 text-(--color-cyan-ink) shrink-0 mt-0.5" />
                     {f}
                   </li>
                 ))}
