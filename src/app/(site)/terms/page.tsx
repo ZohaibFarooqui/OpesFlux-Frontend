@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Terms of Service",
-  description: "OpesFlux terms of service — the agreement governing use of the OpesFlux platform.",
-  alternates: { canonical: "https://opesflux.devsandvisuals.com/terms" },
-};
+  description:
+    "The terms governing use of the OpesFlux platform, provided by Devs and Visuals, Kington, England.",
+  path: "/terms",
+});
 
 const sections = [
   { id: "acceptance", title: "Acceptance of terms", content: "By accessing or using OpesFlux, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this service." },
@@ -23,7 +24,7 @@ export default function TermsPage() {
   return (
     <div className="pt-32 pb-20 bg-white">
       <div className="max-w-3xl mx-auto px-6">
-        <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan) mb-3">Legal</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan-ink) mb-3">Legal</p>
         <h1 className="text-4xl font-semibold text-(--color-deep-blue) leading-tight tracking-tight mb-2">Terms of Service</h1>
         <p className="text-sm text-(--color-muted) mb-10">Last updated: 30 April 2026 · Placeholder — full terms to be reviewed by legal counsel.</p>
 
@@ -32,7 +33,7 @@ export default function TermsPage() {
           <ol className="space-y-1">
             {sections.map((s) => (
               <li key={s.id}>
-                <a href={`#${s.id}`} className="text-sm text-(--color-cyan) hover:underline underline-offset-4">
+                <a href={`#${s.id}`} className="text-sm text-(--color-cyan-ink) hover:underline underline-offset-4">
                   {s.title}
                 </a>
               </li>

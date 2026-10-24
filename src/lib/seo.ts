@@ -1,40 +1,49 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 
-export function buildMetadata({
+// Next.js merges metadata shallowly: a page's `openGraph` replaces the layout's
+// whole object, image included. Every page builds its metadata here so the
+// canonical, og:url, og:image and locale are never dropped.
+export function pageMetadata({
   title,
   description,
   path = "",
-  ogImage,
+  image,
   type = "website",
+  absoluteTitle = false,
+  noindex = false,
 }: {
   title: string;
   description: string;
   path?: string;
-  ogImage?: string;
+  image?: string;
   type?: "website" | "article";
+  absoluteTitle?: boolean;
+  noindex?: boolean;
 }): Metadata {
   const url = `${siteConfig.url}${path}`;
-  const image = ogImage || siteConfig.ogImage;
+  const ogImage = image || siteConfig.ogImage;
+  const fullTitle = absoluteTitle ? title : `${title} | OpesFlux`;
 
   return {
-    title: `${title} | OpesFlux`,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: `${title} | OpesFlux`,
+      title: fullTitle,
       description,
       url,
       siteName: "OpesFlux",
-      images: [{ url: image, width: 1200, height: 630 }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: "OpesFlux" }],
       locale: "en_GB",
       type,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | OpesFlux`,
+      title: fullTitle,
       description,
-      images: [image],
+      images: [ogImage],
     },
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }

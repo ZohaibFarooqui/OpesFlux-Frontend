@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: "OpesFlux privacy policy — how we collect, use, and protect your data under UK GDPR.",
-  alternates: { canonical: "https://opesflux.devsandvisuals.com/privacy" },
-};
+  description:
+    "How OpesFlux (Devs and Visuals) collects, uses and protects personal data under UK GDPR, and how to exercise your rights.",
+  path: "/privacy",
+});
 
 const sections = [
   { id: "who", title: "Who we are", content: "OpesFlux is a product of Devs and Visuals, based in Kington, England. When we refer to 'OpesFlux', 'we', 'us', or 'our' in this policy, we mean Devs and Visuals." },
@@ -22,7 +23,7 @@ export default function PrivacyPage() {
   return (
     <div className="pt-32 pb-20 bg-white">
       <div className="max-w-3xl mx-auto px-6">
-        <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan) mb-3">Legal</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-(--color-cyan-ink) mb-3">Legal</p>
         <h1 className="text-4xl font-semibold text-(--color-deep-blue) leading-tight tracking-tight mb-2">Privacy Policy</h1>
         <p className="text-sm text-(--color-muted) mb-10">Last updated: 30 April 2026</p>
 
@@ -32,7 +33,7 @@ export default function PrivacyPage() {
           <ol className="space-y-1">
             {sections.map((s) => (
               <li key={s.id}>
-                <a href={`#${s.id}`} className="text-sm text-(--color-cyan) hover:underline underline-offset-4">
+                <a href={`#${s.id}`} className="text-sm text-(--color-cyan-ink) hover:underline underline-offset-4">
                   {s.title}
                 </a>
               </li>
