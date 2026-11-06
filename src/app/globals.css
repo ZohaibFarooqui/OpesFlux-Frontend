@@ -106,7 +106,12 @@ body {
 @keyframes flow-dash {
   to { stroke-dashoffset: -20; }
 }
-.animate-flow { animation: flow-dash 1.5s linear infinite; }
+/* The moving dashes repaint the whole hero every frame, which costs phones
+   seconds of main-thread time. Animate on large screens only, and never
+   when the visitor asks for reduced motion. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .animate-flow { animation: flow-dash 1.5s linear infinite; }
+}
 
 .gradient-text {
   background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 100%);
