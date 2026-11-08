@@ -11,6 +11,7 @@ export const footerNav: Record<"product" | "industries" | "compare" | "company",
   product: [
     { label: "Features", href: "/features" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Free tools", href: "/tools" },
     { label: "Book a demo", href: "/contact" },
     { label: "Sign in", href: "https://app.devsandvisuals.com/login" },
   ],

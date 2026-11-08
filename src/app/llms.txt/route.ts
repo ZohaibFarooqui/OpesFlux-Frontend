@@ -2,6 +2,7 @@ import { siteConfig } from "@/config/site";
 import { PRICING_TIERS } from "@/config/pricing";
 import { INDUSTRIES_LIST } from "@/config/industries";
 import { COMPARISONS } from "@/config/compare";
+import { TOOLS } from "@/config/tools";
 import { PRICING_FAQS } from "@/config/faq";
 
 // /llms.txt: plain facts for AI assistants and answer engines, built from the
@@ -60,6 +61,10 @@ ${INDUSTRIES_LIST.map((i) => `- [${i.name}](${u}/industries/${i.slug}): ${i.seo.
 ## Comparisons (competitor facts sourced from their own websites, dated)
 
 ${COMPARISONS.map((c) => `- [OpesFlux vs ${c.name}](${u}/compare/${c.slug}): ${c.summary}`).join("\n")}
+
+## Free tools (no sign-up)
+
+${TOOLS.map((t) => `- [${t.name}](${u}/tools/${t.slug}): ${t.summary}`).join("\n")}
 
 ## Accountant and bookkeeper partners
 

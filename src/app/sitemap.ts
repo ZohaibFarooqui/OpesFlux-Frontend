@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { INDUSTRIES_LIST } from "@/config/industries";
 import { COMPARISONS } from "@/config/compare";
+import { TOOLS } from "@/config/tools";
 import { siteConfig } from "@/config/site";
 
 const BASE = siteConfig.url;
@@ -14,6 +15,7 @@ const STATIC_PAGES: { path: string; updated: string; priority: number }[] = [
   { path: "/pricing", updated: "2026-10-24", priority: 0.9 },
   { path: "/industries", updated: "2026-10-24", priority: 0.8 },
   { path: "/compare", updated: "2026-10-24", priority: 0.7 },
+  { path: "/tools", updated: "2026-11-08", priority: 0.7 },
   { path: "/partners", updated: "2026-10-24", priority: 0.6 },
   { path: "/blog", updated: "2026-10-24", priority: 0.6 },
   { path: "/about", updated: "2026-10-24", priority: 0.5 },
@@ -39,6 +41,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...COMPARISONS.map((c) => ({
       url: `${BASE}/compare/${c.slug}`,
       lastModified: new Date(c.checked),
+      priority: 0.7,
+    })),
+    ...TOOLS.map((t) => ({
+      url: `${BASE}/tools/${t.slug}`,
+      lastModified: new Date(t.updated),
       priority: 0.7,
     })),
     ...posts.map((post) => ({

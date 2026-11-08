@@ -161,6 +161,25 @@ export function ArticleJsonLd({
   );
 }
 
+export function ToolJsonLd({ name, description, path }: { name: string; description: string; path: string }) {
+  return (
+    <JsonLdScript
+      schema={{
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        name,
+        description,
+        url: `${siteConfig.url}${path}`,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web browser",
+        isAccessibleForFree: true,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+        publisher: { "@id": ORG_ID },
+      }}
+    />
+  );
+}
+
 export function FaqJsonLd({ faqs }: { faqs: { q: string; a: string }[] }) {
   return (
     <JsonLdScript
