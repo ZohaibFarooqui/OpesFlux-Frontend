@@ -8,6 +8,7 @@ import { IndustriesGrid } from "@/components/sections/IndustriesGrid";
 import { ComplianceCallout } from "@/components/sections/ComplianceCallout";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTASection } from "@/components/sections/CTASection";
+import { FreeTools } from "@/components/sections/FreeTools";
 import { FaqJsonLd, SoftwareAppJsonLd } from "@/components/seo/JsonLd";
 import { COMPARISONS } from "@/config/compare";
 import { PRICING_FAQS } from "@/config/faq";
@@ -42,6 +43,7 @@ export default function HomePage() {
       <IndustriesGrid />
       <HowItWorks />
       <ComplianceCallout />
+      <FreeTools />
 
       <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-8 text-center">

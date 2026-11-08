@@ -272,6 +272,12 @@ export function Header() {
                 Guides
               </Link>
               <Link
+                href="/tools"
+                className="px-4 py-2 text-sm font-medium text-(--color-text) hover:text-(--color-cyan) transition-colors whitespace-nowrap"
+              >
+                Free tools
+              </Link>
+              <Link
                 href="/about"
                 className="px-4 py-2 text-sm font-medium text-(--color-text) hover:text-(--color-cyan) transition-colors rounded-lg hover:bg-(--color-mist)"
               >
@@ -353,6 +359,7 @@ export function Header() {
 
             {[
               { label: "Pricing", href: "/pricing" },
+              { label: "Free tools", href: "/tools" },
               { label: "Compare", href: "/compare" },
               { label: "Guides", href: "/blog" },
               { label: "Accountant partners", href: "/partners" },

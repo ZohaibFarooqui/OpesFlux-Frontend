@@ -10,7 +10,7 @@ const BASE = siteConfig.url;
 // Real last-changed dates, not the build time: a lastmod that changes on every
 // deploy teaches Google to ignore it. Bump a date when that page's content changes.
 const STATIC_PAGES: { path: string; updated: string; priority: number }[] = [
-  { path: "", updated: "2026-10-24", priority: 1 },
+  { path: "", updated: "2026-11-08", priority: 1 },
   { path: "/features", updated: "2026-10-24", priority: 0.9 },
   { path: "/pricing", updated: "2026-10-24", priority: 0.9 },
   { path: "/industries", updated: "2026-10-24", priority: 0.8 },
