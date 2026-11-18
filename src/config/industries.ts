@@ -264,13 +264,13 @@ export const INDUSTRIES_LIST: Industry[] = [
     icon: "Warehouse",
     group: "wholesale",
     seo: {
-      title: "Cash and Carry EPOS and Stock Software (UK)",
+      title: "Cash and Carry Software: EPOS and Stock (UK)",
       description:
-        "Cash and carry EPOS with stock control, purchase orders, trade customer accounts and invoicing in one system. Tills keep selling offline. From £19 a month.",
+        "Cash and carry software with EPOS, stock control, purchase orders, trade accounts and invoicing in one system. Tills keep selling offline. From £19/month.",
     },
     hero: {
       eyebrow: "For cash and carry businesses",
-      h1: "Cash and carry EPOS with stock control built in",
+      h1: "Cash and carry software: EPOS with stock control built in",
       intro:
         "A cash and carry is a shop and a wholesaler at the same time. OpesFlux gives you tills at the counter and a full back office behind them: stock, supplier orders, trade customer accounts and invoices, all working from the same numbers.",
     },
