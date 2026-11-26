@@ -20,18 +20,40 @@ export const TOOLS: Tool[] = [
     name: "VAT calculator",
     summary: "Add VAT to a price or take it off, at 20%, 5%, 0% or a rate you enter.",
     seo: {
-      title: "UK VAT Calculator: Add or Remove VAT",
+      title: "UK VAT Calculator: Add, Remove or Reverse VAT",
       description:
-        "Free UK VAT calculator. Add VAT to a net price or remove it from a gross price at 20%, 5% or any rate, and see the formula. No sign-up needed.",
+        "Free UK VAT calculator. Add VAT, remove it, or work it out backwards from a VAT-inclusive price at 20%, 5% or any rate, with the formula shown.",
     },
     h1: "UK VAT calculator",
-    intro: "Add VAT to a price, or work out how much VAT is inside a price that already includes it.",
+    intro:
+      "Add VAT to a price, or work backwards from a price that already includes VAT. Quick answer: at 20%, multiply by 1.2 to add VAT and divide by 1.2 to remove it.",
     sections: [
       {
         heading: "How to work out VAT",
         body: [
           "To add VAT, multiply the net price by 1 plus the rate. At 20%, a £100 net price becomes £100 × 1.2 = £120.",
           "To remove VAT, divide the gross price by 1 plus the rate. At 20%, a £120 gross price is £120 ÷ 1.2 = £100 net, so the VAT is £20.",
+        ],
+      },
+      {
+        heading: "Reverse VAT: working backwards from a VAT-inclusive price",
+        body: [
+          "A reverse (or backwards) VAT calculation starts from the price the customer pays and finds the net price and the VAT inside it. Divide by 1.2 at the standard rate, or by 1.05 at the reduced rate.",
+          "A shortcut for the VAT alone is the VAT fraction: one sixth of a gross price at 20%, and one twenty-first at 5%. £60 including VAT at 20% holds £10 of VAT; £105 at 5% holds £5.",
+        ],
+      },
+      {
+        heading: "Common amounts at 20%",
+        body: [
+          "Adding VAT: £10 becomes £12, £50 becomes £60, £100 becomes £120, £250 becomes £300 and £1,000 becomes £1,200.",
+          "Removing VAT: £12 is £10 net, £60 is £50 net, £120 is £100 net, £300 is £250 net and £1,200 is £1,000 net.",
+        ],
+      },
+      {
+        heading: "Working out the VAT you pay HMRC",
+        body: [
+          "On the standard scheme, the VAT you pay is the VAT you charged on sales minus the VAT you paid on business purchases. If you charged £2,000 and paid £1,200, you owe £800 for the period.",
+          "Special schemes such as the Flat Rate Scheme work differently, so check GOV.UK or your accountant if you use one.",
         ],
       },
       {
@@ -59,12 +81,20 @@ export const TOOLS: Tool[] = [
         a: "Divide the gross price by 1.2 at the 20% rate, or by 1.05 at the 5% rate. The answer is the net price, and the difference is the VAT.",
       },
       {
+        q: "How do I work out VAT backwards from a total?",
+        a: "Divide the total by 1.2 at 20% to get the net price, then subtract it from the total to get the VAT. For £90 including VAT, the net price is £75 and the VAT is £15.",
+      },
+      {
+        q: "What is the VAT fraction?",
+        a: "It is the share of a VAT-inclusive price that is VAT: 1/6 at the 20% rate and 1/21 at the 5% rate. Multiply the gross price by the fraction to get the VAT directly.",
+      },
+      {
         q: "What is the difference between zero-rated and exempt?",
         a: "Both charge no VAT to the customer. Zero-rated sales are still taxable sales at 0%, while exempt sales are outside the VAT system, which can affect how much VAT a business can reclaim.",
       },
     ],
     opesflux: "OpesFlux works out VAT on every sale and invoice, and prepares your VAT return figures for your accountant.",
-    updated: "2026-11-08",
+    updated: "2026-11-26",
   },
   {
     slug: "profit-margin-calculator",
